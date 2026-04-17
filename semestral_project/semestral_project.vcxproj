@@ -138,8 +138,8 @@
     <ClInclude Include="render.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="room.frag" />
-    <None Include="room.vert" />
+    <None Include="shaders\room.frag" />
+    <None Include="shaders\room.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

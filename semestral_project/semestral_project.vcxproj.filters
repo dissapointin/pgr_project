@@ -34,7 +34,11 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="room.vert" />
-    <None Include="room.frag" />
+    <None Include="shaders\room.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\room.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
