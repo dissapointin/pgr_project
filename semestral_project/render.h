@@ -1,6 +1,16 @@
 #pragma once
 #include "pgr.h"
 
+// Room geometry buffers
+struct RoomGeometry {
+    GLuint vao;
+    GLuint vbo;
+    GLuint shaderProgram;
+    GLint  posLocation;
+    GLint  normalLocation;
+    GLint  PVMmatrixLocation;
+};
+
 /// @brief Initialize all scene objects (room, furniture, shaders)
 void initScene();
 
