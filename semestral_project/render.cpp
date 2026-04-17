@@ -1,5 +1,6 @@
 #include "render.h"
 #include "camera.h"
+#include <iostream>
 
 RoomGeometry room;
 
@@ -61,6 +62,14 @@ void initScene() {
      pgr::createShaderFromFile(GL_FRAGMENT_SHADER, "shaders/room.frag"),
      0  
     };
+
+     if (room.shaderProgram == 0) {
+         std::cerr << "Shader program failed!" << std::endl;
+     }
+     if (room.posLocation == -1) {
+         std::cerr << "position attribute not found!" << std::endl;
+     }
+
     room.shaderProgram = pgr::createProgram(shaders);
 
     // get attribute locations
@@ -89,10 +98,25 @@ void initScene() {
     glBindVertexArray(0);
 }
 
-void drawScene() {
+/*void drawScene() {
     glUseProgram(room.shaderProgram);
 
     glm::mat4 model = glm::scale(glm::mat4(1.0f), glm::vec3(5.0f, 3.0f, 5.0f));
+    glm::mat4 PVM = getProjectionMatrix() * getViewMatrix() * model;
+    glUniformMatrix4fv(room.PVMmatrixLocation, 1, GL_FALSE, glm::value_ptr(PVM));
+
+    glBindVertexArray(room.vao);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+    glBindVertexArray(0);
+}*/
+
+// TEST 
+void drawScene() {
+	glClearColor(0.5f, 0.0f, 0.0f, 1.0f); // RED BACKGROUND
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glUseProgram(room.shaderProgram);
+	glm::mat4 model = glm::mat4(1.0f); // NO TRANSFORMATIONS
     glm::mat4 PVM = getProjectionMatrix() * getViewMatrix() * model;
     glUniformMatrix4fv(room.PVMmatrixLocation, 1, GL_FALSE, glm::value_ptr(PVM));
 

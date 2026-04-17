@@ -85,6 +85,7 @@ int main(int argc, char** argv) {
 
     // init scene
     glEnable(GL_DEPTH_TEST);
+    glDisable(GL_CULL_FACE);
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     initScene();   // z render.cpp
     initCamera();  // z camera.cpp
