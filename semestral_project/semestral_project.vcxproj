@@ -137,6 +137,10 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="render.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="room.frag" />
+    <None Include="room.vert" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
