@@ -46,11 +46,12 @@ void setCameraFree() {
 
 void onKeyPress(unsigned char key) {
     if (!freeCamera) return;
+    glm::vec3 flatFront = glm::normalize(glm::vec3(cameraFront.x, 0.0f, cameraFront.z));
     switch (key) {
-    case 'w': cameraPos += speed * cameraFront; break;
-    case 's': cameraPos -= speed * cameraFront; break;
-    case 'a': cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * speed; break;
-    case 'd': cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * speed; break;
+    case 'w': cameraPos += speed * flatFront; break;
+    case 's': cameraPos -= speed * flatFront; break;
+    case 'a': cameraPos -= glm::normalize(glm::cross(flatFront, cameraUp)) * speed; break;
+    case 'd': cameraPos += glm::normalize(glm::cross(flatFront, cameraUp)) * speed; break;
     }
 }
 
