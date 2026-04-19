@@ -38,6 +38,9 @@ void initCamera() {
 }
 
 void setCameraStatic(int index) {
+    freeCamera = false;
+    cameraPos = staticCameras[index].pos;
+    cameraFront = glm::normalize(staticCameras[index].front);
 }
 
 void setCameraFree() {
