@@ -94,7 +94,7 @@ void initScene() {
 void drawScene() {
     glUseProgram(room.shaderProgram);
 
-    glm::mat4 model = glm::scale(glm::mat4(1.0f), glm::vec3(5.0f, 3.0f, 5.0f));
+    glm::mat4 model = glm::scale(glm::mat4(1.0f), glm::vec3(8.0f, 3.5f, 10.0f));
     glm::mat4 PVM = getProjectionMatrix() * getViewMatrix() * model;
     glUniformMatrix4fv(room.PVMmatrixLocation, 1, GL_FALSE, glm::value_ptr(PVM));
 
