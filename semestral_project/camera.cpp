@@ -58,6 +58,30 @@ void onSpecialKeyPress(int key) {
 }
 
 void onMouseMove(int x, int y) {
+    if (!freeCamera) return;
+
+    if (firstMouse) {
+        lastMouseX = x;
+        lastMouseY = y;
+        firstMouse = false;
+    }
+
+    float dx = (x - lastMouseX) * sensitivity;
+    float dy = (lastMouseY - y) * sensitivity; // inverted Y
+    lastMouseX = x;
+    lastMouseY = y;
+
+    yaw += dx;
+    pitch += dy;
+
+    if (pitch > 89.0f) pitch = 89.0f;
+    if (pitch < -89.0f) pitch = -89.0f;
+
+    glm::vec3 front;
+    front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    front.y = sin(glm::radians(pitch));
+    front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    cameraFront = glm::normalize(front);
 }
 
 void onMouseClick(int button, int state, int x, int y) {
