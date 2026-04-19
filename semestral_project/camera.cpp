@@ -59,6 +59,14 @@ void onKeyPress(unsigned char key) {
 }
 
 void onSpecialKeyPress(int key) {
+    if (!freeCamera) return;
+    glm::vec3 flatFront = glm::normalize(glm::vec3(cameraFront.x, 0.0f, cameraFront.z));
+    switch (key) {
+    case GLUT_KEY_UP:    cameraPos += speed * flatFront; break;
+    case GLUT_KEY_DOWN:  cameraPos -= speed * flatFront; break;
+    case GLUT_KEY_LEFT:  cameraPos -= glm::normalize(glm::cross(flatFront, cameraUp)) * speed; break;
+    case GLUT_KEY_RIGHT: cameraPos += glm::normalize(glm::cross(flatFront, cameraUp)) * speed; break;
+    }
 }
 
 void onMouseMove(int x, int y) {
