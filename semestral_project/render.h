@@ -11,11 +11,26 @@ struct RoomGeometry {
     GLint PVMmatrixLocation;
     GLint MmatrixLocation;
     GLint normalMatrixLocation;
-    GLint lightDirLocation;
-    GLint lightColorLocation;
     GLint shininessLocation;
     GLint cameraPosLocation;
+    // dir light
+    GLint dirLightDirLocation;
+    GLint dirLightColorLocation;
+    // point light
+    GLint pointLightPosLocation;
+    GLint pointLightColorLocation;
+    GLint pointLightConstantLocation;
+    GLint pointLightLinearLocation;
+    GLint pointLightQuadraticLocation;
+    // spot light
+    GLint spotLightPosLocation;
+    GLint spotLightDirLocation;
+    GLint spotLightColorLocation;
+    GLint spotLightCutoffLocation;
+    GLint spotLightOuterCutoffLocation;
 };
+
+extern bool spotLightOn;
 
 /// @brief Initialize all scene objects (room, furniture, shaders)
 void initScene();

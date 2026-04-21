@@ -28,13 +28,14 @@ void keyboard(unsigned char key, int x, int y) {
     case '1': setCameraStatic(0); break;
     case '2': setCameraStatic(1); break;
     case '3': setCameraFree();    break;
+    case 'f': case 'F': spotLightOn = !spotLightOn; break;
     }
-    onKeyPress(key);  // z camera.cpp - pohyb WASD
+    onKeyPress(key);  // from camera.cpp -  WASD
 }
 
 /// @brief Special keys callback (arrows)
 void keyboardSpecial(int key, int x, int y) {
-    onSpecialKeyPress(key);  // z camera.cpp
+    onSpecialKeyPress(key);  // from camera.cpp
 }
 
 /// @brief Mouse movement callback

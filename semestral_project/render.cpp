@@ -4,6 +4,8 @@
 
 RoomGeometry room;
 
+bool spotLightOn = false;
+
 // 6 faces, 2 triangles each, 6 vertices per face
 // format: x, y, z, nx, ny, nz
 static const float roomVertices[] = {
@@ -64,10 +66,20 @@ void initScene() {
     };
 
     room.shaderProgram = pgr::createProgram(shaders);
+    room.dirLightDirLocation = glGetUniformLocation(room.shaderProgram, "dirLightDir");
+    room.dirLightColorLocation = glGetUniformLocation(room.shaderProgram, "dirLightColor");
+    room.pointLightPosLocation = glGetUniformLocation(room.shaderProgram, "pointLightPos");
+    room.pointLightColorLocation = glGetUniformLocation(room.shaderProgram, "pointLightColor");
+    room.pointLightConstantLocation = glGetUniformLocation(room.shaderProgram, "pointLightConstant");
+    room.pointLightLinearLocation = glGetUniformLocation(room.shaderProgram, "pointLightLinear");
+    room.pointLightQuadraticLocation = glGetUniformLocation(room.shaderProgram, "pointLightQuadratic");
+    room.spotLightPosLocation = glGetUniformLocation(room.shaderProgram, "spotLightPos");
+    room.spotLightDirLocation = glGetUniformLocation(room.shaderProgram, "spotLightDir");
+    room.spotLightColorLocation = glGetUniformLocation(room.shaderProgram, "spotLightColor");
+    room.spotLightCutoffLocation = glGetUniformLocation(room.shaderProgram, "spotLightCutoff");
+    room.spotLightOuterCutoffLocation = glGetUniformLocation(room.shaderProgram, "spotLightOuterCutoff");
     room.MmatrixLocation = glGetUniformLocation(room.shaderProgram, "Mmatrix");
     room.normalMatrixLocation = glGetUniformLocation(room.shaderProgram, "normalMatrix");
-    room.lightDirLocation = glGetUniformLocation(room.shaderProgram, "lightDir");
-    room.lightColorLocation = glGetUniformLocation(room.shaderProgram, "lightColor");
     room.shininessLocation = glGetUniformLocation(room.shaderProgram, "shininess");
     room.cameraPosLocation = glGetUniformLocation(room.shaderProgram, "cameraPos");
 
@@ -100,6 +112,9 @@ void initScene() {
 void drawScene() {
     glUseProgram(room.shaderProgram);
 
+    glm::vec3 camPos = getCameraPos();
+    glm::vec3 camFront = getCameraFront();
+
     glm::mat4 model = glm::scale(glm::mat4(1.0f), glm::vec3(8.0f, 3.5f, 10.0f));
     glm::mat4 PVM = getProjectionMatrix() * getViewMatrix() * model;
     glm::mat4 normalMat = glm::transpose(glm::inverse(model));
@@ -108,12 +123,26 @@ void drawScene() {
     glUniformMatrix4fv(room.MmatrixLocation, 1, GL_FALSE, glm::value_ptr(model));
     glUniformMatrix4fv(room.normalMatrixLocation, 1, GL_FALSE, glm::value_ptr(normalMat));
 
-    // light
-    glUniform3f(room.lightDirLocation, 0.5f, 1.0f, 0.3f);  // sun from window (vec is the direction)
-    glUniform3f(room.lightColorLocation, 1.0f, 0.95f, 0.8f); // warm light
+    // directional light
+    glUniform3f(room.dirLightDirLocation, 0.5f, 1.0f, 0.3f);
+    glUniform3f(room.dirLightColorLocation, 1.0f, 0.95f, 0.8f);
+
+    // point light
+    glUniform3f(room.pointLightPosLocation, 0.0f, 3.0f, 0.0f);
+    glUniform3f(room.pointLightColorLocation, 1.0f, 0.9f, 0.7f);
+    glUniform1f(room.pointLightConstantLocation, 1.0f);
+    glUniform1f(room.pointLightLinearLocation, 0.09f);
+    glUniform1f(room.pointLightQuadraticLocation, 0.032f);
+
+    // spot light
+    glUniform3fv(room.spotLightPosLocation, 1, glm::value_ptr(camPos));
+    glUniform3fv(room.spotLightDirLocation, 1, glm::value_ptr(camFront));
+    glm::vec3 spotColor = spotLightOn ? glm::vec3(1.0f, 1.0f, 1.0f) : glm::vec3(0.0f);
+    glUniform3fv(room.spotLightColorLocation, 1, glm::value_ptr(spotColor));
+    glUniform1f(room.spotLightCutoffLocation, glm::cos(glm::radians(12.5f)));
+    glUniform1f(room.spotLightOuterCutoffLocation, glm::cos(glm::radians(17.5f)));
 
     glUniform1f(room.shininessLocation, 16.0f);
-    glm::vec3 camPos = getCameraPos();
     glUniform3fv(room.cameraPosLocation, 1, glm::value_ptr(camPos));
 
     glBindVertexArray(room.vao);
