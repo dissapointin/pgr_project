@@ -114,3 +114,7 @@ glm::mat4 getViewMatrix() {
 glm::mat4 getProjectionMatrix() {
     return projMatrix;
 }
+
+glm::vec3 getCameraPos() {
+    return cameraPos;
+}

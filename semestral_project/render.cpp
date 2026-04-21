@@ -64,6 +64,12 @@ void initScene() {
     };
 
     room.shaderProgram = pgr::createProgram(shaders);
+    room.MmatrixLocation = glGetUniformLocation(room.shaderProgram, "Mmatrix");
+    room.normalMatrixLocation = glGetUniformLocation(room.shaderProgram, "normalMatrix");
+    room.lightDirLocation = glGetUniformLocation(room.shaderProgram, "lightDir");
+    room.lightColorLocation = glGetUniformLocation(room.shaderProgram, "lightColor");
+    room.shininessLocation = glGetUniformLocation(room.shaderProgram, "shininess");
+    room.cameraPosLocation = glGetUniformLocation(room.shaderProgram, "cameraPos");
 
     // get attribute locations
     room.posLocation = glGetAttribLocation(room.shaderProgram, "position");
@@ -96,7 +102,19 @@ void drawScene() {
 
     glm::mat4 model = glm::scale(glm::mat4(1.0f), glm::vec3(8.0f, 3.5f, 10.0f));
     glm::mat4 PVM = getProjectionMatrix() * getViewMatrix() * model;
+    glm::mat4 normalMat = glm::transpose(glm::inverse(model));
+
     glUniformMatrix4fv(room.PVMmatrixLocation, 1, GL_FALSE, glm::value_ptr(PVM));
+    glUniformMatrix4fv(room.MmatrixLocation, 1, GL_FALSE, glm::value_ptr(model));
+    glUniformMatrix4fv(room.normalMatrixLocation, 1, GL_FALSE, glm::value_ptr(normalMat));
+
+    // light
+    glUniform3f(room.lightDirLocation, 0.5f, 1.0f, 0.3f);  // sun from window (vec is the direction)
+    glUniform3f(room.lightColorLocation, 1.0f, 0.95f, 0.8f); // warm light
+
+    glUniform1f(room.shininessLocation, 16.0f);
+    glm::vec3 camPos = getCameraPos();
+    glUniform3fv(room.cameraPosLocation, 1, glm::value_ptr(camPos));
 
     glBindVertexArray(room.vao);
     glDrawArrays(GL_TRIANGLES, 0, 36);

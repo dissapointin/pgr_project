@@ -43,3 +43,7 @@ glm::mat4 getViewMatrix();
 /// @brief Get current projection matrix
 /// @return projection matrix
 glm::mat4 getProjectionMatrix();
+
+/// @brief Get current camera position
+/// @return camera position
+glm::vec3 getCameraPos();
