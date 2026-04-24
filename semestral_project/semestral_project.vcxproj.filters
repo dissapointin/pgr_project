@@ -24,6 +24,9 @@
     <ClCompile Include="camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="board.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="render.h">
@@ -32,12 +35,21 @@
     <ClInclude Include="camera.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="board.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\room.frag">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="shaders\room.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\board.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\board.frag">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

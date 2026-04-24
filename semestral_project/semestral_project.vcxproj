@@ -130,14 +130,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="board.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="render.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
+    <ClInclude Include="board.h" />
     <ClInclude Include="render.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="shaders\board.frag" />
+    <None Include="shaders\board.vert" />
     <None Include="shaders\room.frag" />
     <None Include="shaders\room.vert" />
   </ItemGroup>

@@ -1,6 +1,7 @@
 #include "render.h"
 #include "camera.h"
 #include <iostream>
+#include "board.h"
 
 RoomGeometry room;
 
@@ -107,6 +108,8 @@ void initScene() {
         6 * sizeof(float), (void*)(3 * sizeof(float)));
 
     glBindVertexArray(0);
+
+    initBoard();
 }
 
 void drawScene() {
@@ -148,6 +151,8 @@ void drawScene() {
     glBindVertexArray(room.vao);
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glBindVertexArray(0);
+
+    drawBoard();
 }
 
 void updateScene() {
