@@ -8,55 +8,55 @@ RoomGeometry room;
 bool spotLightOn = false;
 
 // 6 faces, 2 triangles each, 6 vertices per face
-// format: x, y, z, nx, ny, nz
+// format: x, y, z, nx, ny, nz, u, v
 static const float roomVertices[] = {
     // Floor (y = -1), normal pointing up
-    -1,-1,-1,  0, 1, 0,
-     1,-1,-1,  0, 1, 0,
-     1,-1, 1,  0, 1, 0,
-    -1,-1,-1,  0, 1, 0,
-     1,-1, 1,  0, 1, 0,
-    -1,-1, 1,  0, 1, 0,
+     -1,-1,-1,  0,1,0,  0,0,
+     1,-1,-1,  0,1,0,  1,0,
+     1,-1, 1,  0,1,0,  1,1,
+     -1,-1,-1,  0,1,0,  0,0,
+     1,-1, 1,  0,1,0,  1,1,
+     -1,-1, 1,  0,1,0,  0,1,
 
     // Ceiling (y = 1), normal pointing down
-    -1, 1,-1,  0,-1, 0,
-     1, 1, 1,  0,-1, 0,
-     1, 1,-1,  0,-1, 0,
-    -1, 1,-1,  0,-1, 0,
-    -1, 1, 1,  0,-1, 0,
-     1, 1, 1,  0,-1, 0,
+    -1, 1,-1,  0,-1,0,  0,0,
+    1, 1, 1,  0,-1,0,  1,1,
+    1, 1,-1,  0,-1,0,  1,0,
+    -1, 1,-1,  0,-1,0,  0,0,
+    -1, 1, 1,  0,-1,0,  0,1,
+    1, 1, 1,  0,-1,0,  1,1,
 
      // Back wall (z = -1), normal pointing forward
-     -1,-1,-1,  0, 0, 1,
-      1, 1,-1,  0, 0, 1,
-      1,-1,-1,  0, 0, 1,
-     -1,-1,-1,  0, 0, 1,
-     -1, 1,-1,  0, 0, 1,
-      1, 1,-1,  0, 0, 1,
+     -1,-1,-1,  0,0,1,  0,0,
+     1, 1,-1,  0,0,1,  1,1,
+     1,-1,-1,  0,0,1,  1,0,
+     -1,-1,-1,  0,0,1,  0,0,
+     -1, 1,-1,  0,0,1,  0,1,
+     1, 1,-1,  0,0,1,  1,1,
 
       // Front wall (z = 1), normal pointing backward
-      -1,-1, 1,  0, 0,-1,
-       1,-1, 1,  0, 0,-1,
-       1, 1, 1,  0, 0,-1,
-      -1,-1, 1,  0, 0,-1,
-       1, 1, 1,  0, 0,-1,
-      -1, 1, 1,  0, 0,-1,
+      -1,-1, 1,  0,0,-1,  0,0,
+      1,-1, 1,  0,0,-1,  1,0,
+      1, 1, 1,  0,0,-1,  1,1,
+      -1,-1, 1,  0,0,-1,  0,0,
+      1, 1, 1,  0,0,-1,  1,1,
+      -1, 1, 1,  0,0,-1,  0,1,
 
       // Left wall (x = -1), normal pointing right
-      -1,-1,-1,  1, 0, 0,
-      -1,-1, 1,  1, 0, 0,
-      -1, 1, 1,  1, 0, 0,
-      -1,-1,-1,  1, 0, 0,
-      -1, 1, 1,  1, 0, 0,
-      -1, 1,-1,  1, 0, 0,
+      -1,-1,-1,  1,0,0,  0,0,
+      -1,-1, 1,  1,0,0,  1,0,
+      -1, 1, 1,  1,0,0,  1,1,
+      -1,-1,-1,  1,0,0,  0,0,
+      -1, 1, 1,  1,0,0,  1,1,
+      -1, 1,-1,  1,0,0,  0,1,
 
       // Right wall (x = 1), normal pointing left
-       1,-1,-1, -1, 0, 0,
-       1, 1, 1, -1, 0, 0,
-       1,-1, 1, -1, 0, 0,
-       1,-1,-1, -1, 0, 0,
-       1, 1,-1, -1, 0, 0,
-       1, 1, 1, -1, 0, 0,
+       1,-1,-1,  -1,0,0,  0,0,
+       1, 1, 1,  -1,0,0,  1,1,
+       1,-1, 1,  -1,0,0,  1,0,
+       1,-1,-1,  -1,0,0,  0,0,
+       1, 1,-1,  -1,0,0,  0,1,
+       1, 1, 1,  -1,0,0,  1,1,
 };
 
 void initScene() {
@@ -100,12 +100,26 @@ void initScene() {
     // position: first 3 floats
     glEnableVertexAttribArray(room.posLocation);
     glVertexAttribPointer(room.posLocation, 3, GL_FLOAT, GL_FALSE,
-        6 * sizeof(float), (void*)0);
+        8 * sizeof(float), (void*)0);
 
     // normal: next 3 floats
     glEnableVertexAttribArray(room.normalLocation);
     glVertexAttribPointer(room.normalLocation, 3, GL_FLOAT, GL_FALSE,
-        6 * sizeof(float), (void*)(3 * sizeof(float)));
+        8 * sizeof(float), (void*)(3 * sizeof(float)));
+
+    // texcoord attributes
+    GLint texCoordLocation = glGetAttribLocation(room.shaderProgram, "texCoord");
+    glEnableVertexAttribArray(texCoordLocation);
+    glVertexAttribPointer(texCoordLocation, 2, GL_FLOAT, GL_FALSE,
+        8 * sizeof(float), (void*)(6 * sizeof(float)));
+
+    // load textures
+    room.floorTexture = pgr::createTexture("textures/floor_texture.jpg");
+    room.wallTexture = pgr::createTexture("textures/wall_texture.jpg");
+    room.ceilingTexture = pgr::createTexture("textures/ceiling_texture.jpg");
+    room.texSamplerLocation = glGetUniformLocation(room.shaderProgram, "texSampler");
+    room.wallSamplerLocation = glGetUniformLocation(room.shaderProgram, "wallSampler");
+    room.ceilingSamplerLocation = glGetUniformLocation(room.shaderProgram, "ceilingSampler");
 
     glBindVertexArray(0);
 
@@ -147,6 +161,18 @@ void drawScene() {
 
     glUniform1f(room.shininessLocation, 16.0f);
     glUniform3fv(room.cameraPosLocation, 1, glm::value_ptr(camPos));
+
+    // textures
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, room.floorTexture);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, room.wallTexture);
+    glActiveTexture(GL_TEXTURE2);
+    glBindTexture(GL_TEXTURE_2D, room.ceilingTexture);
+
+    glUniform1i(room.texSamplerLocation, 0);
+    glUniform1i(room.wallSamplerLocation, 1);
+    glUniform1i(room.ceilingSamplerLocation, 2);
 
     glBindVertexArray(room.vao);
     glDrawArrays(GL_TRIANGLES, 0, 36);

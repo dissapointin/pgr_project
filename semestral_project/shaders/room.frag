@@ -27,6 +27,11 @@ smooth in vec3 fragPos_v;
 smooth in vec3 normal_v;
 out vec4 fragColor;
 
+uniform sampler2D texSampler; // floor
+uniform sampler2D wallSampler; // walls
+uniform sampler2D ceilingSampler; // ceiling
+smooth in vec2 texCoord_v;
+
 vec3 calcDirLight(vec3 norm, vec3 viewDir, vec3 diffuse) {
     vec3 lightD = normalize(dirLightDir);
     vec3 reflDir = reflect(-lightD, norm);
@@ -80,16 +85,16 @@ void main() {
     // reflect to calculate normal of reflection
     vec3 reflDir = reflect(-lightD, norm);
 
-    // chose color dependent on the normal
-    vec3 diffuse;
+    vec3 texColor;
     if (abs(norm.y) > 0.5) {
         if (norm.y > 0.0)
-            diffuse = vec3(0.55, 0.35, 0.20); // ceiling is white
+            texColor = vec3(texture(texSampler, texCoord_v * 3.0));     // floor
         else
-            diffuse = vec3(0.95, 0.95, 0.90); // floor is brown
+            texColor = vec3(texture(ceilingSampler, texCoord_v * 2.0)); // ceiling
     } else {
-        diffuse = vec3(0.85, 0.78, 0.65); // walls are beige
+        texColor = vec3(texture(wallSampler, texCoord_v * 2.0));        // walls
     }
+    vec3 diffuse = texColor;
 
     vec3 result = calcDirLight(norm, viewDir, diffuse)
                 + calcPointLight(norm, viewDir, diffuse)

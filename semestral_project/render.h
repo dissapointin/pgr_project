@@ -28,6 +28,13 @@ struct RoomGeometry {
     GLint spotLightColorLocation;
     GLint spotLightCutoffLocation;
     GLint spotLightOuterCutoffLocation;
+    // room textures
+    GLuint floorTexture;
+    GLuint wallTexture;
+    GLuint ceilingTexture;
+    GLint texSamplerLocation;
+    GLint wallSamplerLocation;
+    GLint ceilingSamplerLocation;
 };
 
 extern bool spotLightOn;
