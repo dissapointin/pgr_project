@@ -1,3 +1,11 @@
+// DESK AND CHAIR MODELS: https://sketchfab.com/3d-models/school-desk-a74180ee97bb4917b24cd48580663b44
+// SHELF MODEL: https://sketchfab.com/3d-models/kallax-shelf-e2d30124563947608a500df26f77b659
+// TRASH BIN MODEL: https://sketchfab.com/3d-models/waste-bins-f25c067806dd45aba900502e9c470e7a
+// CEILING LAMP MODEL: https://sketchfab.com/3d-models/ceiling-lamp-673-ffd6cdb14ab849658c45ed4e3676e7d1
+// ENCYCLOPEDIA MODEL: https://sketchfab.com/3d-models/book-encyclopedia-0487cb088c244d02a736cb337e65778c
+// WINDOW MODEL: https://sketchfab.com/3d-models/window-2811eb28fa7a49b4adb86b948f75ff37
+// DOOR MODEL: https://sketchfab.com/3d-models/door-with-frame-2f2f149f3ec44d658a02c1f924dfa449
+
 #include "pgr.h"
 #include "render.h"
 #include "camera.h"
