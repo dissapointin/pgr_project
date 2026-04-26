@@ -2,6 +2,9 @@
 #include "camera.h"
 #include <iostream>
 #include "board.h"
+#include "model.h"
+
+Model lampModel;
 
 RoomGeometry room;
 
@@ -124,6 +127,9 @@ void initScene() {
     glBindVertexArray(0);
 
     initBoard();
+
+    initModelShader(lampModel);
+    loadModel("models/ceiling_lamp/ceiling_lamp.obj", lampModel);
 }
 
 void drawScene() {
@@ -179,6 +185,10 @@ void drawScene() {
     glBindVertexArray(0);
 
     drawBoard();
+
+    glm::mat4 lampMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 3.3f, 0.0f));
+    lampMatrix = glm::scale(lampMatrix, glm::vec3(0.02f, 0.02f, 0.02f));
+    drawModel(lampModel, lampMatrix);
 }
 
 void updateScene() {
