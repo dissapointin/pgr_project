@@ -4,7 +4,7 @@
 // CEILING LAMP MODEL: https://sketchfab.com/3d-models/ceiling-lamp-673-ffd6cdb14ab849658c45ed4e3676e7d1
 // ENCYCLOPEDIA MODEL: https://sketchfab.com/3d-models/book-encyclopedia-0487cb088c244d02a736cb337e65778c
 // WINDOW MODEL: https://sketchfab.com/3d-models/window-2811eb28fa7a49b4adb86b948f75ff37
-// DOOR MODEL: https://sketchfab.com/3d-models/door-with-frame-2f2f149f3ec44d658a02c1f924dfa449
+// TEACHER'S DESK MODEL: https://sketchfab.com/3d-models/teachers-desk-9ee8608e76704de7aa67d022c81e42cc
 
 #include "pgr.h"
 #include "render.h"

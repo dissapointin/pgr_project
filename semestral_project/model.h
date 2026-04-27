@@ -13,6 +13,7 @@ struct Mesh {
     GLuint texture;
     int indexCount;
 	float opacity; // for transperancy, 1.0f = opaque, 0.0f = fully transparent
+    glm::vec3 diffuseColor;
 };
 
 struct Model {

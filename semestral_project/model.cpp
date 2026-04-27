@@ -57,6 +57,10 @@ static void processMesh(aiMesh* mesh, const aiScene* scene,
         float opacity = 1.0f;
         material->Get(AI_MATKEY_OPACITY, opacity);
         m.opacity = opacity;
+
+        aiColor3D color(0.6f, 0.5f, 0.4f);
+        material->Get(AI_MATKEY_COLOR_DIFFUSE, color);
+        m.diffuseColor = glm::vec3(color.r, color.g, color.b);
     }
 
     // VAO + VBO + EBO
@@ -182,8 +186,7 @@ void drawModel(const Model& model, const glm::mat4& modelMatrix) {
             glUniform1i(model.hasTextureLocation, 1);
         }
         else {
-            glUniform1i(model.hasTextureLocation, 0);
-            glUniform3f(model.diffuseColorLocation, 0.6f, 0.5f, 0.4f);
+            glUniform3fv(model.diffuseColorLocation, 1, glm::value_ptr(mesh.diffuseColor));
         }
 
         glUniform1f(model.opacityLocation, mesh.opacity);
