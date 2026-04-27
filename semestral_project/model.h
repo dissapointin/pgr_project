@@ -12,6 +12,7 @@ struct Mesh {
     GLuint ebo;
     GLuint texture;
     int indexCount;
+	float opacity; // for transperancy, 1.0f = opaque, 0.0f = fully transparent
 };
 
 struct Model {
@@ -40,6 +41,7 @@ struct Model {
     GLint texSamplerLocation;
     GLint hasTextureLocation;
     GLint diffuseColorLocation;
+    GLint opacityLocation;
 };
 
 /// @brief Load model from .obj file

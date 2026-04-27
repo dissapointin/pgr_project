@@ -54,6 +54,9 @@ static void processMesh(aiMesh* mesh, const aiScene* scene,
             std::string fullPath = directory + "/" + texPath.C_Str();
             m.texture = pgr::createTexture(fullPath.c_str());
         }
+        float opacity = 1.0f;
+        material->Get(AI_MATKEY_OPACITY, opacity);
+        m.opacity = opacity;
     }
 
     // VAO + VBO + EBO
@@ -121,6 +124,7 @@ void initModelShader(Model& model) {
     model.texSamplerLocation = glGetUniformLocation(model.shaderProgram, "texSampler");
     model.hasTextureLocation = glGetUniformLocation(model.shaderProgram, "hasTexture");
     model.diffuseColorLocation = glGetUniformLocation(model.shaderProgram, "diffuseColor");
+    model.opacityLocation = glGetUniformLocation(model.shaderProgram, "opacity");
 }
 
 bool loadModel(const std::string& path, Model& model) {
@@ -181,6 +185,8 @@ void drawModel(const Model& model, const glm::mat4& modelMatrix) {
             glUniform1i(model.hasTextureLocation, 0);
             glUniform3f(model.diffuseColorLocation, 0.6f, 0.5f, 0.4f);
         }
+
+        glUniform1f(model.opacityLocation, mesh.opacity);
 
         glBindVertexArray(mesh.vao);
         glDrawElements(GL_TRIANGLES, mesh.indexCount, GL_UNSIGNED_INT, 0);

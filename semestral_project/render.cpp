@@ -6,6 +6,7 @@
 
 Model lampModel;
 Model doorModel;
+Model windowModel;
 
 RoomGeometry room;
 
@@ -134,6 +135,9 @@ void initScene() {
 
     initModelShader(doorModel);
     loadModel("models/door/door.obj", doorModel);
+
+    initModelShader(windowModel);
+    loadModel("models/window/window.obj", windowModel);
 }
 
 void drawScene() {
@@ -198,6 +202,18 @@ void drawScene() {
     doorMatrix = glm::rotate(doorMatrix, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     doorMatrix = glm::scale(doorMatrix, glm::vec3(0.03f, 0.03f, 0.03f));
     drawModel(doorModel, doorMatrix);
+
+	// AFTER ALL NON-TRANSPARENT OBJECTS ARE DRAWN, ENABLE BLENDING FOR THE WINDOW
+    // TRANSPERANCY FOR THE WINDOW
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    glm::mat4 windowMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-7.9f, -2.0f, 0.0f));
+    windowMatrix = glm::rotate(windowMatrix, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    windowMatrix = glm::scale(windowMatrix, glm::vec3(3.0f, 3.0f, 3.0f));
+    drawModel(windowModel, windowMatrix);
+
+    glDisable(GL_BLEND);
 }
 
 void updateScene() {

@@ -17,6 +17,7 @@ uniform vec3 cameraPos;
 uniform sampler2D texSampler;
 uniform int hasTexture;
 uniform vec3 diffuseColor;
+uniform float opacity;
 
 smooth in vec3 fragPos_v;
 smooth in vec3 normal_v;
@@ -64,13 +65,13 @@ void main() {
     vec3 norm    = normalize(normal_v);
     vec3 viewDir = normalize(cameraPos - fragPos_v);
 
-    vec3 diffuse = hasTexture == 1
-        ? vec3(texture(texSampler, texCoord_v))
-        : diffuseColor;
+    vec4 texSample = texture(texSampler, texCoord_v);
+    vec3 diffuse = hasTexture == 1 ? vec3(texSample) : diffuseColor;
 
     vec3 result = calcDirLight(norm, viewDir, diffuse)
                 + calcPointLight(norm, viewDir, diffuse)
                 + calcSpotLight(norm, viewDir, diffuse);
 
-    fragColor = vec4(result, 1.0);
+    float alpha = hasTexture == 1 ? texSample.a : 1.0;
+fragColor = vec4(result, alpha * opacity);
 }
