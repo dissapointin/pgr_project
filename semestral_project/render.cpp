@@ -5,6 +5,7 @@
 #include "model.h"
 
 Model lampModel;
+Model doorModel;
 
 RoomGeometry room;
 
@@ -130,6 +131,9 @@ void initScene() {
 
     initModelShader(lampModel);
     loadModel("models/ceiling_lamp/ceiling_lamp.obj", lampModel);
+
+    initModelShader(doorModel);
+    loadModel("models/door/door.obj", doorModel);
 }
 
 void drawScene() {
@@ -189,6 +193,11 @@ void drawScene() {
     glm::mat4 lampMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 3.3f, 0.0f));
     lampMatrix = glm::scale(lampMatrix, glm::vec3(0.02f, 0.02f, 0.02f));
     drawModel(lampModel, lampMatrix);
+
+    glm::mat4 doorMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(7.8f, -3.5f, 0.0f));
+    doorMatrix = glm::rotate(doorMatrix, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    doorMatrix = glm::scale(doorMatrix, glm::vec3(0.03f, 0.03f, 0.03f));
+    drawModel(doorModel, doorMatrix);
 }
 
 void updateScene() {

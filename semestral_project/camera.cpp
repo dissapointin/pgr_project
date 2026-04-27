@@ -8,7 +8,7 @@ glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 float yaw = -90.f; // horizontal angle
 float pitch = 0.0f; // vertical angle
 float speed = 0.1f; // speed of the camera
-float sensitivity = 0.1f; // mouse sensitivity
+float sensitivity = 0.3f; // mouse sensitivity
 
 // remember last mouse position for calculating movement between frames
 int lastMouseX = 640;
