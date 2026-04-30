@@ -3,6 +3,7 @@
 #include <iostream>
 #include "board.h"
 #include "model.h"
+#include "skybox.h"
 
 Model lampModel;
 Model doorModel;
@@ -132,6 +133,8 @@ void initScene() {
 
     glBindVertexArray(0);
 
+    initSkybox();
+
     initBoard();
 
     initModelShader(lampModel);
@@ -157,6 +160,8 @@ void initScene() {
 }
 
 void drawScene() {
+    drawSkybox(); // BEFORE ANYTHING ELSE!!!!!
+
     glUseProgram(room.shaderProgram);
 
     glm::vec3 camPos = getCameraPos();
