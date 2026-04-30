@@ -146,7 +146,7 @@ bool loadModel(const std::string& path, Model& model) {
     return true;
 }
 
-void drawModel(const Model& model, const glm::mat4& modelMatrix) {
+void drawModel(const Model& model, const glm::mat4& modelMatrix, float shininess) {
     glUseProgram(model.shaderProgram);
 
     glm::vec3 camPos = getCameraPos();
@@ -190,6 +190,7 @@ void drawModel(const Model& model, const glm::mat4& modelMatrix) {
         }
 
         glUniform1f(model.opacityLocation, mesh.opacity);
+        glUniform1f(model.shininessLocation, shininess);
 
         glBindVertexArray(mesh.vao);
         glDrawElements(GL_TRIANGLES, mesh.indexCount, GL_UNSIGNED_INT, 0);

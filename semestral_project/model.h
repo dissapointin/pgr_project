@@ -54,7 +54,8 @@ bool loadModel(const std::string& path, Model& model);
 /// @brief Draw model at given position
 /// @param model model to draw
 /// @param modelMatrix model transformation matrix
-void drawModel(const Model& model, const glm::mat4& modelMatrix);
+void drawModel(const Model& model, const glm::mat4& modelMatrix,
+    float shininess = 32.0f);
 
 /// @brief Initialize shader for model
 /// @param model model to initialize shader for

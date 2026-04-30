@@ -9,6 +9,7 @@ Model doorModel;
 Model deskModel;
 Model shelfModel;
 Model studentDeskModel;
+Model chairModel;
 Model windowModel;
 
 RoomGeometry room;
@@ -148,6 +149,9 @@ void initScene() {
     initModelShader(studentDeskModel);
     loadModel("models/desk/desk.obj", studentDeskModel);
 
+    initModelShader(chairModel);
+    loadModel("models/chair/chair.obj", chairModel);
+
     initModelShader(windowModel);
     loadModel("models/window/window.obj", windowModel);
 }
@@ -208,7 +212,7 @@ void drawScene() {
 
     glm::mat4 lampMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 3.3f, 0.0f));
     lampMatrix = glm::scale(lampMatrix, glm::vec3(0.02f, 0.02f, 0.02f));
-    drawModel(lampModel, lampMatrix);
+    drawModel(lampModel, lampMatrix, 128.0f);
 
     glm::mat4 doorMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(7.8f, -3.5f, 0.0f));
     doorMatrix = glm::rotate(doorMatrix, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -218,15 +222,15 @@ void drawScene() {
     glm::mat4 deskMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-3.0f, -3.5f, -6.0f));
     deskMatrix = glm::rotate(deskMatrix, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     deskMatrix = glm::scale(deskMatrix, glm::vec3(2.0f, 2.0f, 2.0f));
-    drawModel(deskModel, deskMatrix);
+    drawModel(deskModel, deskMatrix, 64.0f);
 
     glm::mat4 shelfMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -3.5f, 9.5f));
     shelfMatrix = glm::scale(shelfMatrix, glm::vec3(4.0f, 4.0f, 4.0f));
-    drawModel(shelfModel, shelfMatrix);
+    drawModel(shelfModel, shelfMatrix, 256.0f); 
 
     glm::mat4 desk1Matrix = glm::translate(glm::mat4(1.0f), glm::vec3(-4.0f, -3.5f, 2.0f));
     desk1Matrix = glm::scale(desk1Matrix, glm::vec3(0.02f, 0.02f, 0.02f));
-    drawModel(studentDeskModel, desk1Matrix);
+    drawModel(studentDeskModel, desk1Matrix, 16.0f);
 
     glm::mat4 desk2Matrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -3.5f, 2.0f));
     desk2Matrix = glm::scale(desk2Matrix, glm::vec3(0.02f, 0.02f, 0.02f));
@@ -236,9 +240,17 @@ void drawScene() {
     desk3Matrix = glm::scale(desk3Matrix, glm::vec3(0.02f, 0.02f, 0.02f));
     drawModel(studentDeskModel, desk3Matrix);
 
-    drawModel(studentDeskModel, desk1Matrix);
-    drawModel(studentDeskModel, desk2Matrix);
-    drawModel(studentDeskModel, desk3Matrix);
+    glm::mat4 chair1Matrix = glm::translate(glm::mat4(1.0f), glm::vec3(-4.0f, -3.5f, 2.0f));
+    chair1Matrix = glm::scale(chair1Matrix, glm::vec3(0.02f, 0.02f, 0.02f));
+    drawModel(chairModel, chair1Matrix);
+
+    glm::mat4 chair2Matrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -3.5f, 2.0f));
+    chair2Matrix = glm::scale(chair2Matrix, glm::vec3(0.02f, 0.02f, 0.02f));
+    drawModel(chairModel, chair2Matrix);
+
+    glm::mat4 chair3Matrix = glm::translate(glm::mat4(1.0f), glm::vec3(4.0f, -3.5f, 2.0f));
+    chair3Matrix = glm::scale(chair3Matrix, glm::vec3(0.02f, 0.02f, 0.02f));
+    drawModel(chairModel, chair3Matrix);
 
 	// AFTER ALL NON-TRANSPARENT OBJECTS ARE DRAWN, ENABLE BLENDING FOR THE WINDOW
     // TRANSPERANCY FOR THE WINDOW
