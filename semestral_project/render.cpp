@@ -12,6 +12,7 @@ Model deskModel;
 Model shelfModel;
 Model studentDeskModel;
 Model chairModel;
+Model tvModel;
 Model windowModel;
 
 RoomGeometry room;
@@ -158,6 +159,9 @@ void initScene() {
     initModelShader(chairModel);
     loadModel("models/chair/chair.obj", chairModel);
 
+    initModelShader(tvModel);
+    loadModel("models/tv/tv.obj", tvModel);
+
     initModelShader(windowModel);
     loadModel("models/window/window.obj", windowModel);
 }
@@ -261,6 +265,11 @@ void drawScene() {
     glm::mat4 chair3Matrix = glm::translate(glm::mat4(1.0f), glm::vec3(4.0f, -3.5f, 2.0f));
     chair3Matrix = glm::scale(chair3Matrix, glm::vec3(0.02f, 0.02f, 0.02f));
     drawModel(chairModel, chair3Matrix);
+
+    glm::mat4 tvMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-1.5f, -1.5f, -5.0f));
+    tvMatrix = glm::rotate(tvMatrix, glm::radians(30.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    tvMatrix = glm::scale(tvMatrix, glm::vec3(1.0f, 1.0f, 1.0f));
+    drawModel(tvModel, tvMatrix);
 
 	// AFTER ALL NON-TRANSPARENT OBJECTS ARE DRAWN, ENABLE BLENDING FOR THE WINDOW
     // TRANSPERANCY FOR THE WINDOW
