@@ -4,6 +4,7 @@
 #include "board.h"
 #include "model.h"
 #include "skybox.h"
+#include "clock.h"
 
 Model lampModel;
 Model doorModel;
@@ -136,6 +137,8 @@ void initScene() {
     initSkybox();
 
     initBoard();
+    
+    initClock();
 
     initModelShader(lampModel);
     loadModel("models/ceiling_lamp/ceiling_lamp.obj", lampModel);
@@ -214,6 +217,8 @@ void drawScene() {
     glBindVertexArray(0);
 
     drawBoard();
+
+    drawClock();
 
     glm::mat4 lampMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 3.3f, 0.0f));
     lampMatrix = glm::scale(lampMatrix, glm::vec3(0.02f, 0.02f, 0.02f));

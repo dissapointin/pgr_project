@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="board.cpp" />
+    <ClCompile Include="clock.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="model.cpp" />
     <ClCompile Include="render.cpp" />
@@ -139,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="camera.h" />
     <ClInclude Include="board.h" />
+    <ClInclude Include="clock.h" />
     <ClInclude Include="model.h" />
     <ClInclude Include="render.h" />
     <ClInclude Include="skybox.h" />
@@ -146,6 +148,8 @@
   <ItemGroup>
     <None Include="shaders\board.frag" />
     <None Include="shaders\board.vert" />
+    <None Include="shaders\clock.frag" />
+    <None Include="shaders\clock.vert" />
     <None Include="shaders\model.frag" />
     <None Include="shaders\model.vert" />
     <None Include="shaders\room.frag" />
