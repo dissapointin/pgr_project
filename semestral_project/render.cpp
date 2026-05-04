@@ -21,6 +21,12 @@ RoomGeometry room;
 
 bool spotLightOn = false;
 
+bool encyclopediaPicked = false;
+glm::vec3 encyclopediaPos = glm::vec3(-1.0f, -1.3f, 1.0f);
+glm::vec3 encyclopediaDropPos = glm::vec3(-1.0f, -1.3f, 1.0f);
+bool encyclopediaFalling = false;
+float encyclopediaVelocity = 0.0f;
+
 // 6 faces, 2 triangles each, 6 vertices per face
 // format: x, y, z, nx, ny, nz, u, v
 static const float roomVertices[] = {
@@ -280,7 +286,12 @@ void drawScene() {
     tvMatrix = glm::scale(tvMatrix, glm::vec3(1.0f, 1.0f, 1.0f));
     drawModel(tvModel, tvMatrix);
 
-    glm::mat4 encyclopediaMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, -1.3f, 1.0f));
+    glm::vec3 bookPos = encyclopediaPicked
+        ? getCameraPos() + getCameraFront() * 1.5f + glm::vec3(0.3f, -0.3f, 0.0f)
+        : encyclopediaDropPos;
+    encyclopediaPos = bookPos;
+
+    glm::mat4 encyclopediaMatrix = glm::translate(glm::mat4(1.0f), bookPos);
     encyclopediaMatrix = glm::scale(encyclopediaMatrix, glm::vec3(0.5f, 0.5f, 0.5f));
     drawModel(encyclopediaModel, encyclopediaMatrix);
 
@@ -298,4 +309,14 @@ void drawScene() {
 }
 
 void updateScene() {
+    if (encyclopediaFalling) {
+        encyclopediaVelocity -= 0.01f; // gravitation
+        encyclopediaDropPos.y += encyclopediaVelocity;
+
+        if (encyclopediaDropPos.y <= -3.2f) { // floor
+            encyclopediaDropPos.y = -3.2f;
+            encyclopediaFalling = false;
+            encyclopediaVelocity = 0.0f;
+        }
+    }
 }

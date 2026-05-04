@@ -39,6 +39,12 @@ struct RoomGeometry {
 
 extern bool spotLightOn;
 
+extern bool encyclopediaPicked;
+extern glm::vec3 encyclopediaPos;
+extern glm::vec3 encyclopediaDropPos;
+extern bool encyclopediaFalling;
+extern float encyclopediaVelocity;
+
 /// @brief Initialize all scene objects (room, furniture, shaders)
 void initScene();
 

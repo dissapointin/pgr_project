@@ -1,4 +1,5 @@
 #include "camera.h"
+#include "render.h"
 
 // Camera position at the start
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -125,6 +126,23 @@ void onMouseMove(int x, int y) {
 }
 
 void onMouseClick(int button, int state, int x, int y) {
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+        if (encyclopediaPicked) {
+            encyclopediaDropPos = encyclopediaPos;
+            encyclopediaPicked = false;
+            encyclopediaFalling = true;
+            encyclopediaVelocity = 0.0f;
+        }
+        else {
+            glm::vec3 toBook = glm::normalize(encyclopediaPos - cameraPos);
+            float dot = glm::dot(glm::normalize(cameraFront), toBook);
+            float dist = glm::length(encyclopediaPos - cameraPos);
+            if (dot > 0.90f && dist < 15.0f) {
+                encyclopediaPicked = true;
+                encyclopediaFalling = false;
+            }
+        }
+    }
 }
 
 void updateProjection(int width, int height) {
