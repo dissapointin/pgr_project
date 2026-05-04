@@ -36,6 +36,11 @@ void onMouseClick(int button, int state, int x, int y);
 /// @param height new window height
 void updateProjection(int width, int height);
 
+///  @brief Check and handle collision with scene boundaries
+/// @param newPos proposed new camera position, will be modified if it collides with boundaries
+extern bool collisionEnabled;
+void checkCollision(glm::vec3& newPos, const glm::vec3& oldPos);
+
 /// @brief Get current view matrix
 /// @return view matrix
 glm::mat4 getViewMatrix();

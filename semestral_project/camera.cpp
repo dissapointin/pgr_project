@@ -50,22 +50,50 @@ void setCameraFree() {
 void onKeyPress(unsigned char key) {
     if (!freeCamera) return;
     glm::vec3 flatFront = glm::normalize(glm::vec3(cameraFront.x, 0.0f, cameraFront.z));
+    glm::vec3 oldPos = cameraPos;
     switch (key) {
-    case 'w': cameraPos += speed * flatFront; break;
-    case 's': cameraPos -= speed * flatFront; break;
-    case 'a': cameraPos -= glm::normalize(glm::cross(flatFront, cameraUp)) * speed; break;
-    case 'd': cameraPos += glm::normalize(glm::cross(flatFront, cameraUp)) * speed; break;
+    case 'w': 
+        cameraPos += speed * flatFront;
+        checkCollision(cameraPos, oldPos);
+        break;
+    case 's': 
+        cameraPos -= speed * flatFront; 
+        checkCollision(cameraPos, oldPos);
+        break;
+    case 'a': 
+        cameraPos -= glm::normalize(glm::cross(flatFront, cameraUp)) * speed; 
+        checkCollision(cameraPos, oldPos);
+        break;
+    case 'd': 
+        cameraPos += glm::normalize(glm::cross(flatFront, cameraUp)) * speed; 
+        checkCollision(cameraPos, oldPos);
+        break;
     }
 }
 
 void onSpecialKeyPress(int key) {
     if (!freeCamera) return;
     glm::vec3 flatFront = glm::normalize(glm::vec3(cameraFront.x, 0.0f, cameraFront.z));
+    glm::vec3 oldPos = cameraPos;
     switch (key) {
-    case GLUT_KEY_UP:    cameraPos += speed * flatFront; break;
-    case GLUT_KEY_DOWN:  cameraPos -= speed * flatFront; break;
-    case GLUT_KEY_LEFT:  cameraPos -= glm::normalize(glm::cross(flatFront, cameraUp)) * speed; break;
-    case GLUT_KEY_RIGHT: cameraPos += glm::normalize(glm::cross(flatFront, cameraUp)) * speed; break;
+    case GLUT_KEY_UP:
+        cameraPos += speed * flatFront; 
+        checkCollision(cameraPos, oldPos);
+        break;
+    case GLUT_KEY_DOWN:  
+        cameraPos -= speed * flatFront; 
+        checkCollision(cameraPos, oldPos);
+        break;
+    case GLUT_KEY_LEFT:  
+        cameraPos -= glm::normalize(glm::cross(flatFront, cameraUp)) * speed; 
+        checkCollision(cameraPos, oldPos);
+        break;
+    case GLUT_KEY_RIGHT: 
+        cameraPos += glm::normalize(glm::cross(flatFront, cameraUp)) * speed; 
+        checkCollision(cameraPos, oldPos);
+        break;
+    case GLUT_KEY_F1: collisionEnabled = false; break;
+    case GLUT_KEY_F2: collisionEnabled = true;  break;
     }
 }
 
@@ -105,6 +133,26 @@ void updateProjection(int width, int height) {
         (float)width / (float)height,
         0.1f, 100.0f
     );
+}
+
+bool collisionEnabled = true;
+
+void checkCollision(glm::vec3& newPos, const glm::vec3& oldPos) {
+    if (!collisionEnabled) return;
+
+    if (newPos.x < -7.5f) newPos.x = -7.5f;
+    if (newPos.x > 7.5f) newPos.x = 7.5f;
+    if (newPos.z < -9.5f) newPos.z = -9.5f;
+    if (newPos.z > 9.5f) newPos.z = 9.5f;
+    if (newPos.y < -3.0f) newPos.y = -3.0f;
+    if (newPos.y > 2.5f) newPos.y = 2.5f;
+
+    // collision with teacher's desk
+    glm::vec3 deskPos = glm::vec3(-3.0f, -3.5f, -6.0f);
+    float distToDesk = glm::length(glm::vec2(newPos.x - deskPos.x, newPos.z - deskPos.z));
+    if (distToDesk < 1.5f) {
+        newPos = oldPos;
+    }
 }
 
 glm::mat4 getViewMatrix() {

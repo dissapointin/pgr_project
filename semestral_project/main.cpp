@@ -77,6 +77,7 @@ void reshape(int width, int height) {
 int main(int argc, char** argv) {
     // init pgr framework + glut window
     glutInit(&argc, argv);
+    glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     glutCreateWindow(WINDOW_TITLE);
