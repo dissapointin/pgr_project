@@ -5,6 +5,7 @@
 #include "model.h"
 #include "skybox.h"
 #include "clock.h"
+#include "tv.h"
 
 Model lampModel;
 Model doorModel;
@@ -141,6 +142,8 @@ void initScene() {
     
     initClock();
 
+    initTV();
+
     initModelShader(lampModel);
     loadModel("models/ceiling_lamp/ceiling_lamp.obj", lampModel);
 
@@ -224,6 +227,8 @@ void drawScene() {
 
     drawClock();
 
+    drawTV();
+
     glm::mat4 lampMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 3.3f, 0.0f));
     lampMatrix = glm::scale(lampMatrix, glm::vec3(0.02f, 0.02f, 0.02f));
     drawModel(lampModel, lampMatrix, 128.0f);
@@ -266,7 +271,7 @@ void drawScene() {
     chair3Matrix = glm::scale(chair3Matrix, glm::vec3(0.02f, 0.02f, 0.02f));
     drawModel(chairModel, chair3Matrix);
 
-    glm::mat4 tvMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-1.5f, -1.5f, -5.0f));
+    glm::mat4 tvMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-1.5f, -1.5f, -5.6f));
     tvMatrix = glm::rotate(tvMatrix, glm::radians(30.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     tvMatrix = glm::scale(tvMatrix, glm::vec3(1.0f, 1.0f, 1.0f));
     drawModel(tvModel, tvMatrix);

@@ -36,6 +36,9 @@
     <ClCompile Include="clock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="render.h">
@@ -54,6 +57,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="clock.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tv.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -86,6 +92,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="shaders\clock.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\tv.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\tv.vert">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
