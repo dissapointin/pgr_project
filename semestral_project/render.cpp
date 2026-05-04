@@ -14,6 +14,7 @@ Model shelfModel;
 Model studentDeskModel;
 Model chairModel;
 Model tvModel;
+Model encyclopediaModel;
 Model windowModel;
 
 RoomGeometry room;
@@ -165,6 +166,9 @@ void initScene() {
     initModelShader(tvModel);
     loadModel("models/tv/tv.obj", tvModel);
 
+    initModelShader(encyclopediaModel);
+    loadModel("models/encyclopedia/encyclopedia.obj", encyclopediaModel);
+
     initModelShader(windowModel);
     loadModel("models/window/window.obj", windowModel);
 }
@@ -275,6 +279,10 @@ void drawScene() {
     tvMatrix = glm::rotate(tvMatrix, glm::radians(30.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     tvMatrix = glm::scale(tvMatrix, glm::vec3(1.0f, 1.0f, 1.0f));
     drawModel(tvModel, tvMatrix);
+
+    glm::mat4 encyclopediaMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, -1.3f, 1.0f));
+    encyclopediaMatrix = glm::scale(encyclopediaMatrix, glm::vec3(0.5f, 0.5f, 0.5f));
+    drawModel(encyclopediaModel, encyclopediaMatrix);
 
 	// AFTER ALL NON-TRANSPARENT OBJECTS ARE DRAWN, ENABLE BLENDING FOR THE WINDOW
     // TRANSPERANCY FOR THE WINDOW
