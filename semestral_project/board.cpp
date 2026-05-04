@@ -1,5 +1,8 @@
 #include "board.h"
 #include "camera.h"
+//#include "render.h"
+
+extern bool fogEnabled;
 
 BoardGeometry board;
 
@@ -123,6 +126,11 @@ void initBoard() {
 
 void drawBoard() {
     glUseProgram(board.shaderProgram);
+
+    glUniform1f(glGetUniformLocation(board.shaderProgram, "fogStart"), 5.0f);
+    glUniform1f(glGetUniformLocation(board.shaderProgram, "fogEnd"), 15.0f);
+    glUniform3f(glGetUniformLocation(board.shaderProgram, "fogColor"), 0.7f, 0.7f, 0.7f);
+    glUniform1i(glGetUniformLocation(board.shaderProgram, "fogEnabled"), fogEnabled ? 1 : 0);
 
     glm::vec3 camPos = getCameraPos();
     glm::vec3 camFront = getCameraFront();

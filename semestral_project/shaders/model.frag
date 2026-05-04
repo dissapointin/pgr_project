@@ -1,5 +1,10 @@
 #version 140
 
+uniform float fogStart;
+uniform float fogEnd;
+uniform vec3 fogColor;
+uniform int fogEnabled;
+
 uniform vec3 dirLightDir;
 uniform vec3 dirLightColor;
 uniform vec3 pointLightPos;
@@ -18,6 +23,7 @@ uniform sampler2D texSampler;
 uniform int hasTexture;
 uniform vec3 diffuseColor;
 uniform float opacity;
+uniform float specularStrength;
 
 smooth in vec3 fragPos_v;
 smooth in vec3 normal_v;
@@ -32,7 +38,7 @@ vec3 calcDirLight(vec3 norm, vec3 viewDir, vec3 diffuse) {
     float spec   = pow(max(dot(viewDir, reflDir), 0.0), shininess);
     return ambient * dirLightColor
          + diff * diffuse * dirLightColor
-         + spec * vec3(0.05) * dirLightColor;
+         + spec * vec3(specularStrength) * dirLightColor;
 }
 
 vec3 calcPointLight(vec3 norm, vec3 viewDir, vec3 diffuse) {
@@ -73,5 +79,12 @@ void main() {
                 + calcSpotLight(norm, viewDir, diffuse);
 
     float alpha = hasTexture == 1 ? texSample.a : 1.0;
-fragColor = vec4(result, alpha * opacity);
+
+    if (fogEnabled == 1) {
+        float dist = length(cameraPos - fragPos_v);
+        float fogFactor = clamp((fogEnd - dist) / (fogEnd - fogStart), 0.0, 1.0);
+        fragColor = vec4(mix(fogColor, result, fogFactor), alpha * opacity);
+    } else {
+        fragColor = vec4(result, alpha * opacity);
+    }
 }

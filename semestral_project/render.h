@@ -45,6 +45,8 @@ extern glm::vec3 encyclopediaDropPos;
 extern bool encyclopediaFalling;
 extern float encyclopediaVelocity;
 
+extern bool fogEnabled;
+
 /// @brief Initialize all scene objects (room, furniture, shaders)
 void initScene();
 

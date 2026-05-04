@@ -11,6 +11,7 @@
 #include "pgr.h"
 #include "render.h"
 #include "camera.h"
+#include <iostream>
 
 // --- Window settings ---
 const int WINDOW_WIDTH = 1280;
@@ -39,6 +40,7 @@ void keyboard(unsigned char key, int x, int y) {
     case '2': setCameraStatic(1); break;
     case '3': setCameraFree();    break;
     case 'f': case 'F': spotLightOn = !spotLightOn; break;
+    case 'g': case 'G': fogEnabled = !fogEnabled; break;
     }
     onKeyPress(key);  // from camera.cpp -  WASD
 }

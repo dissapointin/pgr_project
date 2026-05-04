@@ -1,5 +1,6 @@
 #include "camera.h"
 #include "render.h"
+#include <iostream>
 
 // Camera position at the start
 glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 0.0f);

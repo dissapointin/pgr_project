@@ -1,5 +1,10 @@
 #version 140
 
+uniform float fogStart;
+uniform float fogEnd;
+uniform vec3 fogColor;
+uniform int fogEnabled;
+
 uniform vec3 dirLightDir;
 uniform vec3 dirLightColor;
 uniform vec3 pointLightPos;
@@ -61,17 +66,23 @@ void main() {
     vec3 viewDir = normalize(cameraPos - fragPos_v);
 
     vec3 diffuse;
-        if (norm.y > 0.5) {
-            diffuse = vec3(0.4, 0.25, 0.1);   // shelf top - brown
-        } else if (norm.z > 0.5 && fragPos_v.y > -1.0) {
-            diffuse = vec3(0.15, 0.35, 0.20); // green board surface
-        } else {
-            diffuse = vec3(0.4, 0.25, 0.1);   // brown frame and shelf front
-        }
+    if (norm.y > 0.5) {
+        diffuse = vec3(0.4, 0.25, 0.1);
+    } else if (norm.z > 0.5 && fragPos_v.y > -1.0) {
+        diffuse = vec3(0.15, 0.35, 0.20);
+    } else {
+        diffuse = vec3(0.4, 0.25, 0.1);
+    }
 
     vec3 result = calcDirLight(norm, viewDir, diffuse)
                 + calcPointLight(norm, viewDir, diffuse)
                 + calcSpotLight(norm, viewDir, diffuse);
 
-    fragColor = vec4(result, 1.0);
+    if (fogEnabled == 1) {
+        float dist = length(cameraPos - fragPos_v);
+        float fogFactor = clamp((fogEnd - dist) / (fogEnd - fogStart), 0.0, 1.0);
+        fragColor = vec4(mix(fogColor, result, fogFactor), 1.0);
+    } else {
+        fragColor = vec4(result, 1.0);
+    }
 }

@@ -17,6 +17,8 @@ Model tvModel;
 Model encyclopediaModel;
 Model windowModel;
 
+bool fogEnabled = false;
+
 RoomGeometry room;
 
 bool spotLightOn = false;
@@ -229,9 +231,18 @@ void drawScene() {
     glUniform1i(room.wallSamplerLocation, 1);
     glUniform1i(room.ceilingSamplerLocation, 2);
 
+    glUniform1f(glGetUniformLocation(room.shaderProgram, "fogStart"), 1.0f);
+    glUniform1f(glGetUniformLocation(room.shaderProgram, "fogEnd"), 10.0f);
+    glUniform3f(glGetUniformLocation(room.shaderProgram, "fogColor"), 0.7f, 0.7f, 0.7f);
+    glUniform1i(glGetUniformLocation(room.shaderProgram, "fogEnabled"), fogEnabled ? 1 : 0);
+
     glBindVertexArray(room.vao);
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glBindVertexArray(0);
+
+    glUniform1f(glGetUniformLocation(room.shaderProgram, "fogStart"), 5.0f);
+    glUniform1f(glGetUniformLocation(room.shaderProgram, "fogEnd"), 15.0f);
+    glUniform3f(glGetUniformLocation(room.shaderProgram, "fogColor"), 0.7f, 0.7f, 0.7f);
 
     drawBoard();
 

@@ -5,6 +5,8 @@
 
 extern bool spotLightOn;
 
+extern bool fogEnabled;
+
 static void processMesh(aiMesh* mesh, const aiScene* scene,
     const std::string& directory, Model& model) {
     std::vector<float> vertices;
@@ -178,6 +180,11 @@ void drawModel(const Model& model, const glm::mat4& modelMatrix, float shininess
     glUniform1f(model.shininessLocation, 32.0f);
     glUniform3fv(model.cameraPosLocation, 1, glm::value_ptr(camPos));
     glUniform1i(model.texSamplerLocation, 0);
+
+    glUniform1f(glGetUniformLocation(model.shaderProgram, "fogStart"), 1.0f);
+    glUniform1f(glGetUniformLocation(model.shaderProgram, "fogEnd"), 10.0f);
+    glUniform3f(glGetUniformLocation(model.shaderProgram, "fogColor"), 0.7f, 0.7f, 0.7f);
+    glUniform1i(glGetUniformLocation(model.shaderProgram, "fogEnabled"), fogEnabled ? 1 : 0);
 
     for (const Mesh& mesh : model.meshes) {
         if (mesh.texture != 0) {
