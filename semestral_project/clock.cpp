@@ -26,8 +26,8 @@ void initClock() {
     clock_obj.texCoordLocation = glGetAttribLocation(clock_obj.shaderProgram, "texCoord");
     clock_obj.PVMmatrixLocation = glGetUniformLocation(clock_obj.shaderProgram, "PVMmatrix");
     clock_obj.texSamplerLocation = glGetUniformLocation(clock_obj.shaderProgram, "texSampler");
-    clock_obj.rotationAngleLocation = glGetUniformLocation(clock_obj.shaderProgram, "rotationAngle");
     clock_obj.useRotationLocation = glGetUniformLocation(clock_obj.shaderProgram, "useRotation");
+    clock_obj.texMatrixLocation = glGetUniformLocation(clock_obj.shaderProgram, "texMatrix");
 
     glGenVertexArrays(1, &clock_obj.vao);
     glBindVertexArray(clock_obj.vao);
@@ -50,33 +50,43 @@ void initClock() {
     clock_obj.arrowTexture = pgr::createTexture("textures/arrow.png");
 }
 
+/// @brief Build rotation matrix around center 
+/// @param angle rotation angle in degrees
+/// @return combined transformation matrix
+static glm::mat4 buildArrowMatrix(float angle) {
+    // transformation 1: rotate
+    glm::mat4 mat = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
+    // transformation 2: scale 
+    mat = glm::scale(mat, glm::vec3(1.0f, 1.0f, 1.0f));
+    return mat;
+}
+
 void drawClock() {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glUseProgram(clock_obj.shaderProgram);
 
-    // position on back wall
+    float timeMs = (float)glutGet(GLUT_ELAPSED_TIME);
+    float secondAngle = (timeMs / 1000.0f) * (360.0f / 60.0f);
+    float minuteAngle = (timeMs / 60000.0f) * (360.0f / 60.0f);
+
+    // draw clock face
     glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(7.9f, 1.0f, -5.0f));
     model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     model = glm::scale(model, glm::vec3(2.0f, 2.0f, 1.0f));
     glm::mat4 PVM = getProjectionMatrix() * getViewMatrix() * model;
     glUniformMatrix4fv(clock_obj.PVMmatrixLocation, 1, GL_FALSE, glm::value_ptr(PVM));
 
-    // draw clock face
     glUniform1i(clock_obj.useRotationLocation, 0);
-    glUniform1f(clock_obj.rotationAngleLocation, 0.0f);
+    glm::mat4 identityMat = glm::mat4(1.0f);
+    glUniformMatrix4fv(clock_obj.texMatrixLocation, 1, GL_FALSE, glm::value_ptr(identityMat));
+
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, clock_obj.clockTexture);
     glUniform1i(clock_obj.texSamplerLocation, 0);
     glBindVertexArray(clock_obj.vao);
     glDrawArrays(GL_TRIANGLES, 0, 6);
-
-    // get time for rotation
-    float timeMs = (float)glutGet(GLUT_ELAPSED_TIME);
-    float secondAngle = (timeMs / 1000.0f) * (360.0f / 60.0f);   // one rotation per minute
-    float minuteAngle = (timeMs / 60000.0f) * (360.0f / 60.0f);  // one rotation per hour
-    float hourAngle = (timeMs / 3600000.0f) * (360.0f / 12.0f); // one rotation per 12 hours
 
     // draw second arrow
     glm::mat4 secondModel = glm::translate(glm::mat4(1.0f), glm::vec3(7.85f, 1.0f, -5.0f));
@@ -84,18 +94,25 @@ void drawClock() {
     secondModel = glm::scale(secondModel, glm::vec3(2.0f, 2.0f, 1.0f));
     glm::mat4 secondPVM = getProjectionMatrix() * getViewMatrix() * secondModel;
     glUniformMatrix4fv(clock_obj.PVMmatrixLocation, 1, GL_FALSE, glm::value_ptr(secondPVM));
+
     glUniform1i(clock_obj.useRotationLocation, 1);
-    glUniform1f(clock_obj.rotationAngleLocation, -secondAngle);
+    glm::mat4 secondTexMat = buildArrowMatrix(-secondAngle);
+    glUniformMatrix4fv(clock_obj.texMatrixLocation, 1, GL_FALSE, glm::value_ptr(secondTexMat));
+
     glBindTexture(GL_TEXTURE_2D, clock_obj.arrowTexture);
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
-    // draw minute arrow (slightly smaller)
+    // draw minute arrow
     glm::mat4 minuteModel = glm::translate(glm::mat4(1.0f), glm::vec3(7.85f, 1.0f, -5.0f));
     minuteModel = glm::rotate(minuteModel, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     minuteModel = glm::scale(minuteModel, glm::vec3(1.6f, 1.6f, 1.0f));
     glm::mat4 minutePVM = getProjectionMatrix() * getViewMatrix() * minuteModel;
     glUniformMatrix4fv(clock_obj.PVMmatrixLocation, 1, GL_FALSE, glm::value_ptr(minutePVM));
-    glUniform1f(clock_obj.rotationAngleLocation, -minuteAngle);
+
+    glUniform1i(clock_obj.useRotationLocation, 1);
+    glm::mat4 minuteTexMat = buildArrowMatrix(-minuteAngle);
+    glUniformMatrix4fv(clock_obj.texMatrixLocation, 1, GL_FALSE, glm::value_ptr(minuteTexMat));
+
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
     glBindVertexArray(0);

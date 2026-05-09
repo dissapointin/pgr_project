@@ -13,6 +13,7 @@ struct ClockGeometry {
     GLint texSamplerLocation;
     GLint rotationAngleLocation;
     GLint useRotationLocation;
+    GLint texMatrixLocation;
 };
 
 /// @brief Initialize clock geometry and textures
