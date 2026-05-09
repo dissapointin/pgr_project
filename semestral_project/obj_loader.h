@@ -1,0 +1,59 @@
+#pragma once
+#include "pgr.h"
+#include <string>
+#include <vector>
+
+struct ObjMesh {
+    GLuint vao;
+    GLuint vbo;
+    GLuint ebo;
+    int indexCount;
+    glm::vec3 diffuseColor;
+    GLuint shaderProgram;
+    GLint posLocation;
+    GLint normalLocation;
+    GLint texCoordLocation;
+    GLint PVMmatrixLocation;
+    GLint MmatrixLocation;
+    GLint normalMatrixLocation;
+    GLint shininessLocation;
+    GLint cameraPosLocation;
+    GLint dirLightDirLocation;
+    GLint dirLightColorLocation;
+    GLint pointLightPosLocation;
+    GLint pointLightColorLocation;
+    GLint pointLightConstantLocation;
+    GLint pointLightLinearLocation;
+    GLint pointLightQuadraticLocation;
+    GLint spotLightPosLocation;
+    GLint spotLightDirLocation;
+    GLint spotLightColorLocation;
+    GLint spotLightCutoffLocation;
+    GLint spotLightOuterCutoffLocation;
+    GLint diffuseColorLocation;
+    GLint fogEnabledLocation;
+    GLint fogStartLocation;
+    GLint fogEndLocation;
+    GLint fogColorLocation;
+};
+
+/// @brief Load material color from MTL file
+/// @param mtlPath path to .mtl file
+/// @return diffuse color (default to gray if loading fails)
+static glm::vec3 loadMTL(const std::string& mtlPath);
+
+/// @brief Load OBJ file without external library
+/// @param path path to .obj file
+/// @param mesh output mesh
+/// @return true if successful
+bool loadOBJ(const std::string& path, ObjMesh& mesh);
+
+/// @brief Initialize shader for OBJ mesh
+/// @param mesh mesh to initialize
+void initObjShader(ObjMesh& mesh);
+
+/// @brief Draw OBJ mesh
+/// @param mesh mesh to draw
+/// @param modelMatrix transformation matrix
+/// @param shininess shininess value
+void drawObjMesh(const ObjMesh& mesh, const glm::mat4& modelMatrix, float shininess = 32.0f);

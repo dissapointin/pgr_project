@@ -6,13 +6,16 @@
 #include "skybox.h"
 #include "clock.h"
 #include "tv.h"
+#include "obj_loader.h"
+
+// Two objects read not through Assimp
+ObjMesh studentDeskMesh;
+ObjMesh chairMesh;
 
 Model lampModel;
 Model doorModel;
 Model deskModel;
 Model shelfModel;
-Model studentDeskModel;
-Model chairModel;
 Model tvModel;
 Model encyclopediaModel;
 Model windowModel;
@@ -165,11 +168,15 @@ void initScene() {
     initModelShader(shelfModel);
     loadModel("models/shelf/shelf.obj", shelfModel);
 
-    initModelShader(studentDeskModel);
-    loadModel("models/desk/desk.obj", studentDeskModel);
+    // Not through Assimp
+    initObjShader(studentDeskMesh);
+    loadOBJ("models/desk/desk.obj", studentDeskMesh);
+    studentDeskMesh.diffuseColor = glm::vec3(0.55f, 0.35f, 0.15f);
 
-    initModelShader(chairModel);
-    loadModel("models/chair/chair.obj", chairModel);
+    // Not through Assimp
+    initObjShader(chairMesh);
+    loadOBJ("models/chair/chair.obj", chairMesh);
+    chairMesh.diffuseColor = glm::vec3(0.4f, 0.25f, 0.1f);
 
     initModelShader(tvModel);
     loadModel("models/tv/tv.obj", tvModel);
@@ -270,27 +277,27 @@ void drawScene() {
 
     glm::mat4 desk1Matrix = glm::translate(glm::mat4(1.0f), glm::vec3(-4.0f, -3.5f, 2.0f));
     desk1Matrix = glm::scale(desk1Matrix, glm::vec3(0.02f, 0.02f, 0.02f));
-    drawModel(studentDeskModel, desk1Matrix, 16.0f);
+    drawObjMesh(studentDeskMesh, desk1Matrix, 16.0f);
 
     glm::mat4 desk2Matrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -3.5f, 2.0f));
     desk2Matrix = glm::scale(desk2Matrix, glm::vec3(0.02f, 0.02f, 0.02f));
-    drawModel(studentDeskModel, desk2Matrix);
+    drawObjMesh(studentDeskMesh, desk2Matrix);
 
     glm::mat4 desk3Matrix = glm::translate(glm::mat4(1.0f), glm::vec3(4.0f, -3.5f, 2.0f));
     desk3Matrix = glm::scale(desk3Matrix, glm::vec3(0.02f, 0.02f, 0.02f));
-    drawModel(studentDeskModel, desk3Matrix);
+    drawObjMesh(studentDeskMesh, desk3Matrix);
 
     glm::mat4 chair1Matrix = glm::translate(glm::mat4(1.0f), glm::vec3(-4.0f, -3.5f, 2.0f));
     chair1Matrix = glm::scale(chair1Matrix, glm::vec3(0.02f, 0.02f, 0.02f));
-    drawModel(chairModel, chair1Matrix);
+    drawObjMesh(chairMesh, chair1Matrix);
 
     glm::mat4 chair2Matrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -3.5f, 2.0f));
     chair2Matrix = glm::scale(chair2Matrix, glm::vec3(0.02f, 0.02f, 0.02f));
-    drawModel(chairModel, chair2Matrix);
+    drawObjMesh(chairMesh, chair2Matrix);
 
     glm::mat4 chair3Matrix = glm::translate(glm::mat4(1.0f), glm::vec3(4.0f, -3.5f, 2.0f));
     chair3Matrix = glm::scale(chair3Matrix, glm::vec3(0.02f, 0.02f, 0.02f));
-    drawModel(chairModel, chair3Matrix);
+    drawObjMesh(chairMesh, chair3Matrix);
 
     glm::mat4 tvMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-1.5f, -1.5f, -5.6f));
     tvMatrix = glm::rotate(tvMatrix, glm::radians(30.0f), glm::vec3(0.0f, 1.0f, 0.0f));
