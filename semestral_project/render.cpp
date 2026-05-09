@@ -8,6 +8,7 @@
 #include "tv.h"
 #include "obj_loader.h"
 #include "fog_texture.h"
+#include "fan.h"
 
 // Two objects read not through Assimp
 ObjMesh studentDeskMesh;
@@ -198,6 +199,8 @@ void initScene() {
     initModelShader(succulentModel);
     loadModel("models/succulent/succulent.obj", succulentModel);
 
+    initFan();
+
     initFogTexture();
 
     initModelShader(windowModel);
@@ -334,6 +337,8 @@ void drawScene() {
     succulentMatrix = glm::scale(succulentMatrix, glm::vec3(0.2f, 0.2f, 0.2f));
     drawModel(succulentModel, succulentMatrix);
 
+    drawFan();
+
     drawFogTexture();
 
 	// AFTER ALL NON-TRANSPARENT OBJECTS ARE DRAWN, ENABLE BLENDING FOR THE WINDOW
@@ -370,4 +375,6 @@ void updateScene() {
             succulentJumpVelocity = 0.0f;
         }
     }
+
+    updateFan();
 }

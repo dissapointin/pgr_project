@@ -11,6 +11,7 @@
 #include "pgr.h"
 #include "render.h"
 #include "camera.h"
+#include "fan.h"
 #include <iostream>
 
 // --- Window settings ---
@@ -36,11 +37,13 @@ void keyboard(unsigned char key, int x, int y) {
     case 27:
         exit(0);
         break;
-    case '1': setCameraStatic(0); break;
-    case '2': setCameraStatic(1); break;
-    case '3': setCameraFree();    break;
     case 'f': case 'F': spotLightOn = !spotLightOn; break;
     case 'g': case 'G': fogEnabled = !fogEnabled; break;
+    case 'z': case 'Z': zPressed = true; break;
+    case '1': if (zPressed) fanMode = FAN_STOPPED;     else setCameraStatic(0); break;
+    case '2': if (zPressed) fanMode = FAN_CIRCLE;      else setCameraStatic(1); break;
+    case '3': if (zPressed) fanMode = FAN_CATMULL_ROM; else setCameraFree();    break;
+    case '4': if (zPressed) fanMode = FAN_BEZIER;      break;
     }
     onKeyPress(key);  // from camera.cpp -  WASD
 }
@@ -65,7 +68,7 @@ void mouse(int button, int state, int x, int y) {
 /// @brief Timer callback - for animations
 /// @param value unused
 void timer(int value) {
-    updateScene();  // z render.cpp - update animaci
+    updateScene();  // from render.cpp - update animations
     glutPostRedisplay();
     glutTimerFunc(16, timer, 0);  // ~60 FPS
 }
@@ -73,7 +76,12 @@ void timer(int value) {
 /// @brief Window resize callback
 void reshape(int width, int height) {
     glViewport(0, 0, width, height);
-    updateProjection(width, height);  // z camera.cpp
+    updateProjection(width, height);  // from camera.cpp
+}
+
+/// @brief Keyboard key release callback
+void keyboardUp(unsigned char key, int x, int y) {
+    if (key == 'z' || key == 'Z') zPressed = false;
 }
 
 int main(int argc, char** argv) {
@@ -91,6 +99,7 @@ int main(int argc, char** argv) {
     // register callbacks
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
+    glutKeyboardUpFunc(keyboardUp);
     glutSpecialFunc(keyboardSpecial);
     glutPassiveMotionFunc(mouseMotion);
     glutMouseFunc(mouse);
@@ -101,8 +110,8 @@ int main(int argc, char** argv) {
     glEnable(GL_DEPTH_TEST);
     glDisable(GL_CULL_FACE);
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-    initScene();   // z render.cpp
-    initCamera();  // z camera.cpp
+    initScene();   // from render.cpp
+    initCamera();  // from camera.cpp
 
     glutMainLoop();
     return 0;

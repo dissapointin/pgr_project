@@ -1,6 +1,10 @@
 #pragma once
 #include "pgr.h"
 
+
+/// @brief Indicates if the 'Z' key is pressed
+extern bool zPressed;
+
 /// @brief Initialize camera to default position
 void initCamera();
 
