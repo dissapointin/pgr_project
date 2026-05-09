@@ -144,6 +144,15 @@ void onMouseClick(int button, int state, int x, int y) {
             }
         }
     }
+
+    // succulent picking
+    glm::vec3 toSucculent = glm::normalize(succulentPos - cameraPos);
+    float dotSucculent = glm::dot(glm::normalize(cameraFront), toSucculent);
+    float distSucculent = glm::length(succulentPos - cameraPos);
+    if (dotSucculent > 0.90f && distSucculent < 15.0f && !succulentJumping) {
+        succulentJumping = true;
+        succulentJumpVelocity = 0.15f;
+    }
 }
 
 void updateProjection(int width, int height) {

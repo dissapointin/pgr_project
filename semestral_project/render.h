@@ -37,6 +37,12 @@ struct RoomGeometry {
     GLint ceilingSamplerLocation;
 };
 
+// For succulent animation
+extern glm::vec3 succulentPos;
+extern bool succulentJumping;
+extern float succulentJumpVelocity;
+extern float succulentBaseY;
+
 extern bool spotLightOn;
 
 extern bool encyclopediaPicked;

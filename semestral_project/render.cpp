@@ -18,7 +18,14 @@ Model deskModel;
 Model shelfModel;
 Model tvModel;
 Model encyclopediaModel;
+Model succulentModel;
 Model windowModel;
+
+// For succulent animation
+glm::vec3 succulentPos = glm::vec3(0.0f, -0.7f, 9.5f);
+bool succulentJumping = false;
+float succulentJumpVelocity = 0.0f;
+float succulentBaseY = -0.7f;
 
 bool fogEnabled = false;
 
@@ -184,6 +191,9 @@ void initScene() {
     initModelShader(encyclopediaModel);
     loadModel("models/encyclopedia/encyclopedia.obj", encyclopediaModel);
 
+    initModelShader(succulentModel);
+    loadModel("models/succulent/succulent.obj", succulentModel);
+
     initModelShader(windowModel);
     loadModel("models/window/window.obj", windowModel);
 }
@@ -313,6 +323,10 @@ void drawScene() {
     encyclopediaMatrix = glm::scale(encyclopediaMatrix, glm::vec3(0.5f, 0.5f, 0.5f));
     drawModel(encyclopediaModel, encyclopediaMatrix);
 
+    glm::mat4 succulentMatrix = glm::translate(glm::mat4(1.0f), succulentPos);
+    succulentMatrix = glm::scale(succulentMatrix, glm::vec3(0.2f, 0.2f, 0.2f));
+    drawModel(succulentModel, succulentMatrix);
+
 	// AFTER ALL NON-TRANSPARENT OBJECTS ARE DRAWN, ENABLE BLENDING FOR THE WINDOW
     // TRANSPERANCY FOR THE WINDOW
     glEnable(GL_BLEND);
@@ -335,6 +349,16 @@ void updateScene() {
             encyclopediaDropPos.y = -3.2f;
             encyclopediaFalling = false;
             encyclopediaVelocity = 0.0f;
+        }
+    }
+
+    if (succulentJumping) {
+        succulentJumpVelocity -= 0.005f;
+        succulentPos.y += succulentJumpVelocity;
+        if (succulentPos.y <= succulentBaseY) {
+            succulentPos.y = succulentBaseY;
+            succulentJumping = false;
+            succulentJumpVelocity = 0.0f;
         }
     }
 }
