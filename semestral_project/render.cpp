@@ -7,6 +7,7 @@
 #include "clock.h"
 #include "tv.h"
 #include "obj_loader.h"
+#include "fog_texture.h"
 
 // Two objects read not through Assimp
 ObjMesh studentDeskMesh;
@@ -20,6 +21,9 @@ Model tvModel;
 Model encyclopediaModel;
 Model succulentModel;
 Model windowModel;
+
+// For light picking
+bool pointLightOn = true;
 
 // For succulent animation
 glm::vec3 succulentPos = glm::vec3(0.0f, -0.7f, 9.5f);
@@ -194,6 +198,8 @@ void initScene() {
     initModelShader(succulentModel);
     loadModel("models/succulent/succulent.obj", succulentModel);
 
+    initFogTexture();
+
     initModelShader(windowModel);
     loadModel("models/window/window.obj", windowModel);
 }
@@ -209,6 +215,7 @@ void drawScene() {
     glm::mat4 model = glm::scale(glm::mat4(1.0f), glm::vec3(8.0f, 3.5f, 10.0f));
     glm::mat4 PVM = getProjectionMatrix() * getViewMatrix() * model;
     glm::mat4 normalMat = glm::transpose(glm::inverse(model));
+    glm::vec3 pointColor = pointLightOn ? glm::vec3(1.0f, 0.9f, 0.7f) : glm::vec3(0.0f);
 
     glUniformMatrix4fv(room.PVMmatrixLocation, 1, GL_FALSE, glm::value_ptr(PVM));
     glUniformMatrix4fv(room.MmatrixLocation, 1, GL_FALSE, glm::value_ptr(model));
@@ -220,7 +227,7 @@ void drawScene() {
 
     // point light
     glUniform3f(room.pointLightPosLocation, 0.0f, 3.0f, 0.0f);
-    glUniform3f(room.pointLightColorLocation, 1.0f, 0.9f, 0.7f);
+    glUniform3fv(room.pointLightColorLocation, 1, glm::value_ptr(pointColor));
     glUniform1f(room.pointLightConstantLocation, 1.0f);
     glUniform1f(room.pointLightLinearLocation, 0.09f);
     glUniform1f(room.pointLightQuadraticLocation, 0.032f);
@@ -326,6 +333,8 @@ void drawScene() {
     glm::mat4 succulentMatrix = glm::translate(glm::mat4(1.0f), succulentPos);
     succulentMatrix = glm::scale(succulentMatrix, glm::vec3(0.2f, 0.2f, 0.2f));
     drawModel(succulentModel, succulentMatrix);
+
+    drawFogTexture();
 
 	// AFTER ALL NON-TRANSPARENT OBJECTS ARE DRAWN, ENABLE BLENDING FOR THE WINDOW
     // TRANSPERANCY FOR THE WINDOW

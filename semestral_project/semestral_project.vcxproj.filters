@@ -42,6 +42,9 @@
     <ClCompile Include="obj_loader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="fog_texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="render.h">
@@ -66,6 +69,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="obj_loader.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fog_texture.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -104,6 +110,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="shaders\tv.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\fog_texture.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\fog_texture.vert">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

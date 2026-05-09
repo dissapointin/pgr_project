@@ -128,6 +128,7 @@ void onMouseMove(int x, int y) {
 
 void onMouseClick(int button, int state, int x, int y) {
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+        // encyclopedia picking
         if (encyclopediaPicked) {
             encyclopediaDropPos = encyclopediaPos;
             encyclopediaPicked = false;
@@ -143,15 +144,26 @@ void onMouseClick(int button, int state, int x, int y) {
                 encyclopediaFalling = false;
             }
         }
+
+        // succulent picking
+        glm::vec3 toSucculent = glm::normalize(succulentPos - cameraPos);
+        float dotSucculent = glm::dot(glm::normalize(cameraFront), toSucculent);
+        float distSucculent = glm::length(succulentPos - cameraPos);
+        if (dotSucculent > 0.90f && distSucculent < 15.0f && !succulentJumping) {
+            succulentJumping = true;
+            succulentJumpVelocity = 0.15f;
+        }
     }
 
-    // succulent picking
-    glm::vec3 toSucculent = glm::normalize(succulentPos - cameraPos);
-    float dotSucculent = glm::dot(glm::normalize(cameraFront), toSucculent);
-    float distSucculent = glm::length(succulentPos - cameraPos);
-    if (dotSucculent > 0.90f && distSucculent < 15.0f && !succulentJumping) {
-        succulentJumping = true;
-        succulentJumpVelocity = 0.15f;
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
+        // lamp picking
+        glm::vec3 lampPos = glm::vec3(0.0f, 3.3f, 0.0f);
+        glm::vec3 toLamp = glm::normalize(lampPos - cameraPos);
+        float dotLamp = glm::dot(glm::normalize(cameraFront), toLamp);
+        float distLamp = glm::length(lampPos - cameraPos);
+        if (dotLamp > 0.85f && distLamp < 15.0f) {
+            pointLightOn = !pointLightOn;
+        }
     }
 }
 

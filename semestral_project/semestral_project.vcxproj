@@ -132,6 +132,7 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="board.cpp" />
     <ClCompile Include="clock.cpp" />
+    <ClCompile Include="fog_texture.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="model.cpp" />
     <ClCompile Include="obj_loader.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="board.h" />
     <ClInclude Include="clock.h" />
+    <ClInclude Include="fog_texture.h" />
     <ClInclude Include="model.h" />
     <ClInclude Include="obj_loader.h" />
     <ClInclude Include="render.h" />
@@ -154,6 +156,8 @@
     <None Include="shaders\board.vert" />
     <None Include="shaders\clock.frag" />
     <None Include="shaders\clock.vert" />
+    <None Include="shaders\fog_texture.frag" />
+    <None Include="shaders\fog_texture.vert" />
     <None Include="shaders\model.frag" />
     <None Include="shaders\model.vert" />
     <None Include="shaders\room.frag" />

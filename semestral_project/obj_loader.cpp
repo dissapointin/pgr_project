@@ -186,6 +186,8 @@ void drawObjMesh(const ObjMesh& mesh, const glm::mat4& modelMatrix, float shinin
     glm::mat4 PVM = getProjectionMatrix() * getViewMatrix() * modelMatrix;
     glm::mat4 normalMat = glm::transpose(glm::inverse(modelMatrix));
 
+    glm::vec3 pointColor = pointLightOn ? glm::vec3(1.0f, 0.9f, 0.7f) : glm::vec3(0.0f);
+
     glUniformMatrix4fv(mesh.PVMmatrixLocation, 1, GL_FALSE, glm::value_ptr(PVM));
     glUniformMatrix4fv(mesh.MmatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
     glUniformMatrix4fv(mesh.normalMatrixLocation, 1, GL_FALSE, glm::value_ptr(normalMat));
@@ -194,7 +196,7 @@ void drawObjMesh(const ObjMesh& mesh, const glm::mat4& modelMatrix, float shinin
     glUniform3f(mesh.dirLightColorLocation, 1.0f, 0.95f, 0.8f);
 
     glUniform3f(mesh.pointLightPosLocation, 0.0f, 3.0f, 0.0f);
-    glUniform3f(mesh.pointLightColorLocation, 1.0f, 0.9f, 0.7f);
+    glUniform3fv(mesh.pointLightColorLocation, 1, glm::value_ptr(pointColor));
     glUniform1f(mesh.pointLightConstantLocation, 1.0f);
     glUniform1f(mesh.pointLightLinearLocation, 0.09f);
     glUniform1f(mesh.pointLightQuadraticLocation, 0.032f);
