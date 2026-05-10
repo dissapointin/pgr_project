@@ -1,6 +1,5 @@
 #include "render.h"
 #include "camera.h"
-#include <iostream>
 #include "board.h"
 #include "model.h"
 #include "skybox.h"
@@ -10,6 +9,9 @@
 #include "fog_texture.h"
 #include "fan.h"
 #include "statusbar.h"
+#include "font.h"
+#include <sstream>
+#include <iomanip>
 
 float timeOfDay = 0.0f; // 0.0 = morning, 0.5 = midday, 1.0 = evening
 bool autoTime = true;   // automatic time change
@@ -189,6 +191,8 @@ void initScene() {
     initTV();
 
     initStatusBar();
+
+    initFont();
 
     initModelShader(lampModel);
     loadModel("models/ceiling_lamp/ceiling_lamp.obj", lampModel);
@@ -397,6 +401,10 @@ void drawScene() {
     glDisable(GL_BLEND);
 
     drawStatusBar();
+
+    std::ostringstream oss;
+    oss << "TIME: " << std::fixed << std::setprecision(2) << timeOfDay;
+    drawText(oss.str(), -0.9f, -0.8f, 0.5f);
 }
 
 void updateScene() {

@@ -54,6 +54,9 @@
     <ClCompile Include="statusbar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="render.h">
@@ -90,6 +93,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="statusbar.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="font.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -140,6 +146,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="shaders\statusbar.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\font.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\font.vert">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

@@ -135,6 +135,7 @@
     <ClCompile Include="config.cpp" />
     <ClCompile Include="fan.cpp" />
     <ClCompile Include="fog_texture.cpp" />
+    <ClCompile Include="font.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="model.cpp" />
     <ClCompile Include="obj_loader.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="config.h" />
     <ClInclude Include="fan.h" />
     <ClInclude Include="fog_texture.h" />
+    <ClInclude Include="font.h" />
     <ClInclude Include="model.h" />
     <ClInclude Include="obj_loader.h" />
     <ClInclude Include="render.h" />
@@ -164,6 +166,8 @@
     <None Include="shaders\clock.vert" />
     <None Include="shaders\fog_texture.frag" />
     <None Include="shaders\fog_texture.vert" />
+    <None Include="shaders\font.frag" />
+    <None Include="shaders\font.vert" />
     <None Include="shaders\model.frag" />
     <None Include="shaders\model.vert" />
     <None Include="shaders\room.frag" />
