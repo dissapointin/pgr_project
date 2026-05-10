@@ -51,6 +51,9 @@
     <ClCompile Include="config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="statusbar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="render.h">
@@ -84,6 +87,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="config.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="statusbar.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -128,6 +134,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="shaders\fog_texture.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\statusbar.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\statusbar.vert">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

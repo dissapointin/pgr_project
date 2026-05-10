@@ -140,6 +140,7 @@
     <ClCompile Include="obj_loader.cpp" />
     <ClCompile Include="render.cpp" />
     <ClCompile Include="skybox.cpp" />
+    <ClCompile Include="statusbar.cpp" />
     <ClCompile Include="tv.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +154,7 @@
     <ClInclude Include="obj_loader.h" />
     <ClInclude Include="render.h" />
     <ClInclude Include="skybox.h" />
+    <ClInclude Include="statusbar.h" />
     <ClInclude Include="tv.h" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +170,8 @@
     <None Include="shaders\room.vert" />
     <None Include="shaders\skybox.frag" />
     <None Include="shaders\skybox.vert" />
+    <None Include="shaders\statusbar.frag" />
+    <None Include="shaders\statusbar.vert" />
     <None Include="shaders\tv.frag" />
     <None Include="shaders\tv.vert" />
   </ItemGroup>

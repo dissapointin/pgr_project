@@ -9,6 +9,7 @@
 #include "obj_loader.h"
 #include "fog_texture.h"
 #include "fan.h"
+#include "statusbar.h"
 
 float timeOfDay = 0.0f; // 0.0 = morning, 0.5 = midday, 1.0 = evening
 bool autoTime = true;   // automatic time change
@@ -186,6 +187,8 @@ void initScene() {
     initClock();
 
     initTV();
+
+    initStatusBar();
 
     initModelShader(lampModel);
     loadModel("models/ceiling_lamp/ceiling_lamp.obj", lampModel);
@@ -392,6 +395,8 @@ void drawScene() {
     drawModel(windowModel, windowMatrix);
 
     glDisable(GL_BLEND);
+
+    drawStatusBar();
 }
 
 void updateScene() {
