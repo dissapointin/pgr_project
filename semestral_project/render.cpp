@@ -86,12 +86,37 @@ static const float roomVertices[] = {
       -1, 1, 1,  0,0,-1,  0,1,
 
       // Left wall (x = -1), normal pointing right
+      // Bottom part
       -1,-1,-1,  1,0,0,  0,0,
       -1,-1, 1,  1,0,0,  1,0,
-      -1, 1, 1,  1,0,0,  1,1,
+      -1,-0.4f, 1,  1,0,0,  1,0.3f,
       -1,-1,-1,  1,0,0,  0,0,
+      -1,-0.4f, 1,  1,0,0,  1,0.3f,
+      -1,-0.4f,-1,  1,0,0,  0,0.3f,
+
+      // Top part
+      -1, 0.9f,-1,  1,0,0,  0,0.95f,
+      -1, 0.9f, 1,  1,0,0,  1,0.95f,
+      -1, 1, 1,  1,0,0,  1,1,
+      -1, 0.9f,-1,  1,0,0,  0,0.95f,
       -1, 1, 1,  1,0,0,  1,1,
       -1, 1,-1,  1,0,0,  0,1,
+
+      // Left part (z = -1 to -0.4)
+      -1,-0.4f,-1,  1,0,0,  0,0.3f,
+      -1,-0.4f,-0.4f,  1,0,0,  0.3f,0.3f,
+      -1, 0.9f,-0.4f,  1,0,0,  0.3f,0.95f,
+      -1,-0.4f,-1,  1,0,0,  0,0.3f,
+      -1, 0.9f,-0.4f,  1,0,0,  0.3f,0.95f,
+      -1, 0.9f,-1,  1,0,0,  0,0.95f,
+
+      // Right part (z = 0.2 to 1)
+      -1,-0.4f, 0.2f,  1,0,0,  0.6f,0.3f,
+      -1,-0.4f, 1,  1,0,0,  1,0.3f,
+      -1, 0.9f, 1,  1,0,0,  1,0.95f,
+      -1,-0.4f, 0.2f,  1,0,0,  0.6f,0.3f,
+      -1, 0.9f, 1,  1,0,0,  1,0.95f,
+      -1, 0.9f, 0.2f,  1,0,0,  0.6f,0.95f,
 
       // Right wall (x = 1), normal pointing left
        1,-1,-1,  -1,0,0,  0,0,
@@ -311,7 +336,7 @@ void drawScene() {
     glUniform1i(glGetUniformLocation(room.shaderProgram, "fogEnabled"), fogEnabled ? 1 : 0);
 
     glBindVertexArray(room.vao);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+    glDrawArrays(GL_TRIANGLES, 0, 54);
     glBindVertexArray(0);
 
     glUniform1f(glGetUniformLocation(room.shaderProgram, "fogStart"), 5.0f);
