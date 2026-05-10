@@ -37,6 +37,11 @@ struct RoomGeometry {
     GLint ceilingSamplerLocation;
 };
 
+extern float timeOfDay;
+extern bool autoTime;
+glm::vec3 getDirLightDir();
+glm::vec3 getDirLightColor();
+
 // For light picking
 extern bool pointLightOn;
 

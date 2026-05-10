@@ -1,6 +1,6 @@
 #include "board.h"
 #include "camera.h"
-//#include "render.h"
+#include "render.h"
 
 extern bool fogEnabled;
 
@@ -146,8 +146,8 @@ void drawBoard() {
     glUniformMatrix4fv(board.MmatrixLocation, 1, GL_FALSE, glm::value_ptr(model));
     glUniformMatrix4fv(board.normalMatrixLocation, 1, GL_FALSE, glm::value_ptr(normalMat));
 
-    glUniform3f(board.dirLightDirLocation, 0.5f, 1.0f, 0.3f);
-    glUniform3f(board.dirLightColorLocation, 1.0f, 0.95f, 0.8f);
+    glUniform3fv(board.dirLightDirLocation, 1, glm::value_ptr(getDirLightDir()));
+    glUniform3fv(board.dirLightColorLocation, 1, glm::value_ptr(getDirLightColor()));
 
     glUniform3f(board.pointLightPosLocation, 0.0f, 3.0f, 0.0f);
     glUniform3f(board.pointLightColorLocation, 1.0f, 0.9f, 0.7f);

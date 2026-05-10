@@ -161,8 +161,8 @@ void drawModel(const Model& model, const glm::mat4& modelMatrix, float shininess
     glUniformMatrix4fv(model.MmatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
     glUniformMatrix4fv(model.normalMatrixLocation, 1, GL_FALSE, glm::value_ptr(normalMat));
 
-    glUniform3f(model.dirLightDirLocation, 0.5f, 1.0f, 0.3f);
-    glUniform3f(model.dirLightColorLocation, 1.0f, 0.95f, 0.8f);
+    glUniform3fv(model.dirLightDirLocation, 1, glm::value_ptr(getDirLightDir()));
+    glUniform3fv(model.dirLightColorLocation, 1, glm::value_ptr(getDirLightColor()));
 
     glUniform3f(model.pointLightPosLocation, 0.0f, 3.0f, 0.0f);
     glm::vec3 pointColor = pointLightOn ? glm::vec3(1.0f, 0.9f, 0.7f) : glm::vec3(0.0f);

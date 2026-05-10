@@ -10,6 +10,9 @@
 #include "fog_texture.h"
 #include "fan.h"
 
+float timeOfDay = 0.0f; // 0.0 = morning, 0.5 = midday, 1.0 = evening
+bool autoTime = true;   // automatic time change
+
 // Two objects read not through Assimp
 ObjMesh studentDeskMesh;
 ObjMesh chairMesh;
@@ -95,6 +98,22 @@ static const float roomVertices[] = {
        1, 1,-1,  -1,0,0,  0,1,
        1, 1, 1,  -1,0,0,  1,1,
 };
+
+glm::vec3 getDirLightDir() {
+    float angle = timeOfDay * 2.0f * 3.14159f;
+    return glm::normalize(glm::vec3(sin(angle), cos(angle) * 0.5f + 0.3f, 0.3f));
+}
+
+glm::vec3 getDirLightColor() {
+    if (timeOfDay < 0.25f)
+        return glm::vec3(1.0f, 0.6f, 0.3f);  // morning
+    else if (timeOfDay < 0.5f)
+        return glm::vec3(1.0f, 0.95f, 0.8f); // day
+    else if (timeOfDay < 0.75f)
+        return glm::vec3(1.0f, 0.4f, 0.1f);  // evening 
+    else
+        return glm::vec3(0.1f, 0.1f, 0.3f);  // night
+}
 
 void initScene() {
      GLuint shaders[] = {
@@ -225,8 +244,29 @@ void drawScene() {
     glUniformMatrix4fv(room.normalMatrixLocation, 1, GL_FALSE, glm::value_ptr(normalMat));
 
     // directional light
-    glUniform3f(room.dirLightDirLocation, 0.5f, 1.0f, 0.3f);
-    glUniform3f(room.dirLightColorLocation, 1.0f, 0.95f, 0.8f);
+    // day/night based on timeOfDay
+    float sunAngle = timeOfDay * 2.0f * 3.14159f;
+    glm::vec3 dynDirLight = glm::vec3(sin(sunAngle), cos(sunAngle) * 0.5f + 0.5f, 0.3f);
+    glm::vec3 dynDirColor;
+    if (timeOfDay < 0.25f) {
+        // morning - warm orange
+        dynDirColor = glm::vec3(1.0f, 0.6f, 0.3f);
+    }
+    else if (timeOfDay < 0.5f) {
+        // day - bright white
+        dynDirColor = glm::vec3(1.0f, 0.95f, 0.8f);
+    }
+    else if (timeOfDay < 0.75f) {
+        // evening - orange-red
+        dynDirColor = glm::vec3(1.0f, 0.4f, 0.1f);
+    }
+    else {
+		// night - dim blue
+        dynDirColor = glm::vec3(0.1f, 0.1f, 0.3f);
+    }
+
+    glUniform3fv(room.dirLightDirLocation, 1, glm::value_ptr(dynDirLight));
+    glUniform3fv(room.dirLightColorLocation, 1, glm::value_ptr(dynDirColor));
 
     // point light
     glUniform3f(room.pointLightPosLocation, 0.0f, 3.0f, 0.0f);
@@ -374,6 +414,11 @@ void updateScene() {
             succulentJumping = false;
             succulentJumpVelocity = 0.0f;
         }
+    }
+
+    if (autoTime) {
+        timeOfDay += 0.0001f;
+        if (timeOfDay > 1.0f) timeOfDay = 0.0f;
     }
 
     updateFan();

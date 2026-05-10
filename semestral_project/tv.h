@@ -13,6 +13,12 @@ struct TVGeometry {
     GLint frameLocation;
     GLint colsLocation;
     GLint rowsLocation;
+    GLint MmatrixLocation;
+    GLint cameraPosLocation;
+    GLint fogEnabledLocation;
+    GLint fogStartLocation;
+    GLint fogEndLocation;
+    GLint fogColorLocation;
 };
 
 /// @brief Initialize TV screen geometry

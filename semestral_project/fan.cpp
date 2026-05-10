@@ -164,8 +164,8 @@ void drawFan() {
     glm::vec3 camFront = getCameraFront();
 
     // lighting
-    glUniform3f(fan.dirLightDirLocation, 0.5f, 1.0f, 0.3f);
-    glUniform3f(fan.dirLightColorLocation, 1.0f, 0.95f, 0.8f);
+    glUniform3fv(fan.dirLightDirLocation, 1, glm::value_ptr(getDirLightDir()));
+    glUniform3fv(fan.dirLightColorLocation, 1, glm::value_ptr(getDirLightColor()));
     glm::vec3 pointColor = pointLightOn ? glm::vec3(1.0f, 0.9f, 0.7f) : glm::vec3(0.0f);
     glUniform3f(fan.pointLightPosLocation, 0.0f, 3.0f, 0.0f);
     glUniform3fv(fan.pointLightColorLocation, 1, glm::value_ptr(pointColor));
@@ -202,7 +202,7 @@ void drawFan() {
     // Blades (level 3, rotate around Z)
     for (int i = 0; i < 4; i++) {
         float bladeOffset = 90.0f * i;
-        glm::mat4 bladeMatrix = glm::translate(headMatrix, glm::vec3(0.0f, 0.2f, 0.15f)); // îäíà òî÷êà äëÿ âñ³õ
+        glm::mat4 bladeMatrix = glm::translate(headMatrix, glm::vec3(0.0f, 0.2f, 0.15f)); // Ð¾Ð´Ð½Ð° Ñ‚Ð¾Ñ‡ÐºÐ° Ð´Ð»Ñ Ð²ÑÑ–Ñ…
         bladeMatrix = glm::rotate(bladeMatrix, glm::radians(fanBladeAngle + bladeOffset), glm::vec3(0, 0, 1));
         bladeMatrix = glm::rotate(bladeMatrix, glm::radians(90.0f), glm::vec3(0, 1, 0));
         drawPart(fan.bladeVao, fan.bladeVertexCount, bladeMatrix,

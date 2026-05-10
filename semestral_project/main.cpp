@@ -40,6 +40,9 @@ void keyboard(unsigned char key, int x, int y) {
     case 'f': case 'F': spotLightOn = !spotLightOn; break;
     case 'g': case 'G': fogEnabled = !fogEnabled; break;
     case 'z': case 'Z': zPressed = true; break;
+	case 't': case 'T': autoTime = !autoTime; break;  // on/off auto time change
+    case 'y': case 'Y': timeOfDay += 0.05f; if (timeOfDay > 1.0f) timeOfDay = 0.0f; break; // forward
+	case 'u': case 'U': timeOfDay -= 0.05f; if (timeOfDay < 0.0f) timeOfDay = 1.0f; break; // backward
     case '1': if (zPressed) fanMode = FAN_STOPPED;     else setCameraStatic(0); break;
     case '2': if (zPressed) fanMode = FAN_CIRCLE;      else setCameraStatic(1); break;
     case '3': if (zPressed) fanMode = FAN_CATMULL_ROM; else setCameraFree();    break;

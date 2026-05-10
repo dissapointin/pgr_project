@@ -192,8 +192,8 @@ void drawObjMesh(const ObjMesh& mesh, const glm::mat4& modelMatrix, float shinin
     glUniformMatrix4fv(mesh.MmatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
     glUniformMatrix4fv(mesh.normalMatrixLocation, 1, GL_FALSE, glm::value_ptr(normalMat));
 
-    glUniform3f(mesh.dirLightDirLocation, 0.5f, 1.0f, 0.3f);
-    glUniform3f(mesh.dirLightColorLocation, 1.0f, 0.95f, 0.8f);
+    glUniform3fv(mesh.dirLightDirLocation, 1, glm::value_ptr(getDirLightDir()));
+    glUniform3fv(mesh.dirLightColorLocation, 1, glm::value_ptr(getDirLightColor()));
 
     glUniform3f(mesh.pointLightPosLocation, 0.0f, 3.0f, 0.0f);
     glUniform3fv(mesh.pointLightColorLocation, 1, glm::value_ptr(pointColor));

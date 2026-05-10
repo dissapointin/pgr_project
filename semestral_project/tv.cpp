@@ -1,5 +1,7 @@
 #include "tv.h"
 #include "camera.h"
+#include "render.h"
+extern bool fogEnabled;
 
 TVGeometry tv;
 
@@ -32,6 +34,12 @@ void initTV() {
     tv.frameLocation = glGetUniformLocation(tv.shaderProgram, "currentFrame");
     tv.colsLocation = glGetUniformLocation(tv.shaderProgram, "cols");
     tv.rowsLocation = glGetUniformLocation(tv.shaderProgram, "rows");
+    tv.MmatrixLocation = glGetUniformLocation(tv.shaderProgram, "Mmatrix");
+    tv.cameraPosLocation = glGetUniformLocation(tv.shaderProgram, "cameraPos");
+    tv.fogEnabledLocation = glGetUniformLocation(tv.shaderProgram, "fogEnabled");
+    tv.fogStartLocation = glGetUniformLocation(tv.shaderProgram, "fogStart");
+    tv.fogEndLocation = glGetUniformLocation(tv.shaderProgram, "fogEnd");
+    tv.fogColorLocation = glGetUniformLocation(tv.shaderProgram, "fogColor");
 
     glGenVertexArrays(1, &tv.vao);
     glBindVertexArray(tv.vao);
@@ -61,7 +69,15 @@ void drawTV() {
     model = glm::rotate(model, glm::radians(30.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     model = glm::scale(model, glm::vec3(1.5f, 1.0f, 1.0f));
     glm::mat4 PVM = getProjectionMatrix() * getViewMatrix() * model;
+
+    glm::vec3 camPos = getCameraPos();
     glUniformMatrix4fv(tv.PVMmatrixLocation, 1, GL_FALSE, glm::value_ptr(PVM));
+    glUniformMatrix4fv(tv.MmatrixLocation, 1, GL_FALSE, glm::value_ptr(model));
+    glUniform3fv(tv.cameraPosLocation, 1, glm::value_ptr(camPos));
+    glUniform1i(tv.fogEnabledLocation, fogEnabled ? 1 : 0);
+    glUniform1f(tv.fogStartLocation, 1.0f);
+    glUniform1f(tv.fogEndLocation, 10.0f);
+    glUniform3f(tv.fogColorLocation, 0.7f, 0.7f, 0.7f);
 
     // calculate current frame
     float timeMs = (float)glutGet(GLUT_ELAPSED_TIME);
