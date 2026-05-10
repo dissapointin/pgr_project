@@ -84,6 +84,21 @@ void keyboardUp(unsigned char key, int x, int y) {
     if (key == 'z' || key == 'Z') zPressed = false;
 }
 
+/// @brief Menu callback for fan animation modes and toggles
+void menu(int value) {
+    switch (value) {
+    case 1: setCameraStatic(0); break;
+    case 2: setCameraStatic(1); break;
+    case 3: setCameraFree();    break;
+    case 4: spotLightOn = !spotLightOn; break;
+    case 5: fogEnabled = !fogEnabled; break;
+    case 6: fanMode = FAN_CIRCLE; break;
+    case 7: fanMode = FAN_CATMULL_ROM; break;
+    case 8: fanMode = FAN_BEZIER; break;
+    case 9: fanMode = FAN_STOPPED; break;
+    }
+}
+
 int main(int argc, char** argv) {
     // init pgr framework + glut window
     glutInit(&argc, argv);
@@ -91,6 +106,18 @@ int main(int argc, char** argv) {
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     glutCreateWindow(WINDOW_TITLE);
+
+    glutCreateMenu(menu);
+    glutAddMenuEntry("Camera 1", 1);
+    glutAddMenuEntry("Camera 2", 2);
+    glutAddMenuEntry("Free camera", 3);
+    glutAddMenuEntry("Toggle flashlight", 4);
+    glutAddMenuEntry("Toggle fog", 5);
+    glutAddMenuEntry("Fan: circle", 6);
+    glutAddMenuEntry("Fan: Catmull-Rom", 7);
+    glutAddMenuEntry("Fan: Bezier", 8);
+    glutAddMenuEntry("Fan: stop", 9);
+    glutAttachMenu(GLUT_RIGHT_BUTTON);
 
     if (!pgr::initialize(pgr::OGL_VER_MAJOR, pgr::OGL_VER_MINOR)) {
         exit(1);

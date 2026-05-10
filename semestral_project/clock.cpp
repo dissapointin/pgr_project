@@ -56,8 +56,8 @@ void initClock() {
 static glm::mat4 buildArrowMatrix(float angle) {
     // transformation 1: rotate
     glm::mat4 mat = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
-    // transformation 2: scale 
-    mat = glm::scale(mat, glm::vec3(1.0f, 1.0f, 1.0f));
+    // transformation 2: slight scale 
+    mat = glm::scale(mat, glm::vec3(0.8f, 0.8f, 0.8f));
     return mat;
 }
 

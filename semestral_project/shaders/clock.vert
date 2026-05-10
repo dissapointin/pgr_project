@@ -10,11 +10,12 @@ uniform int useRotation;
 smooth out vec2 texCoord_v;
 
 void main() {
+    gl_Position = PVMmatrix * vec4(position, 1.0);
+    
     if (useRotation == 1) {
-        vec4 rotatedPos = texMatrix * vec4(position.xy, 0.0, 1.0);
-        gl_Position = PVMmatrix * vec4(rotatedPos.xy, position.z, 1.0);
+        vec2 centered = texCoord - vec2(0.5, 0.5);
+        texCoord_v = vec2(texMatrix * vec4(centered, 0.0, 1.0)) + vec2(0.5, 0.5);
     } else {
-        gl_Position = PVMmatrix * vec4(position, 1.0);
+        texCoord_v = texCoord;
     }
-    texCoord_v = texCoord;
 }

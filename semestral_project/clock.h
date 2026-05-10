@@ -11,7 +11,6 @@ struct ClockGeometry {
     GLint texCoordLocation;
     GLint PVMmatrixLocation;
     GLint texSamplerLocation;
-    GLint rotationAngleLocation;
     GLint useRotationLocation;
     GLint texMatrixLocation;
 };
