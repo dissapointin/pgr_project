@@ -1,0 +1,26 @@
+# Fog parameters
+fogStart 1.0
+fogEnd 10.0
+
+# Succulent position
+succulentX 0.0
+succulentY -0.7
+succulentZ 9.5
+
+# Camera start position
+cameraX 0.0
+cameraY 0.0
+cameraZ 5.0
+
+# Catmull-Rom control points
+catmull0 2.0 -3.5 0.0
+catmull1 5.0 -3.5 -4.0
+catmull2 0.0 -3.5 -7.0
+catmull3 -5.0 -3.5 -4.0
+catmull4 -5.0 -3.5 4.0
+catmull5 0.0 -3.5 7.0
+catmull6 5.0 -3.5 4.0
+catmull7 2.0 -3.5 0.0
+
+# Skybox directory
+skyboxDir skybox

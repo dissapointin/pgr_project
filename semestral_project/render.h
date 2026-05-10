@@ -37,6 +37,10 @@ struct RoomGeometry {
     GLint ceilingSamplerLocation;
 };
 
+// for config
+extern float configFogStart;
+extern float configFogEnd;
+
 extern float timeOfDay;
 extern bool autoTime;
 glm::vec3 getDirLightDir();

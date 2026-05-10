@@ -16,7 +16,7 @@ glm::vec3 fanPosition = glm::vec3(2.0f, -0.7f, 9.0f);
 float fanTime = 0.0f;
 
 // Catmull-Rom control points 
-static const glm::vec3 catmullPoints[] = {
+glm::vec3 catmullPoints[] = {
     glm::vec3(2.0f, -3.5f,  0.0f),
     glm::vec3(5.0f, -3.5f, -4.0f),
     glm::vec3(0.0f, -3.5f, -7.0f),

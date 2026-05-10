@@ -12,6 +12,7 @@
 #include "render.h"
 #include "camera.h"
 #include "fan.h"
+#include "config.h"
 #include <iostream>
 
 // --- Window settings ---
@@ -40,6 +41,7 @@ void keyboard(unsigned char key, int x, int y) {
     case 'f': case 'F': spotLightOn = !spotLightOn; break;
     case 'g': case 'G': fogEnabled = !fogEnabled; break;
     case 'z': case 'Z': zPressed = true; break;
+    case 'r': case 'R': loadConfig("config.txt"); break;
 	case 't': case 'T': autoTime = !autoTime; break;  // on/off auto time change
     case 'y': case 'Y': timeOfDay += 0.05f; if (timeOfDay > 1.0f) timeOfDay = 0.0f; break; // forward
 	case 'u': case 'U': timeOfDay -= 0.05f; if (timeOfDay < 0.0f) timeOfDay = 1.0f; break; // backward
@@ -142,6 +144,7 @@ int main(int argc, char** argv) {
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     initScene();   // from render.cpp
     initCamera();  // from camera.cpp
+    loadConfig("config.txt");
 
     glutMainLoop();
     return 0;

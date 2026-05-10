@@ -51,6 +51,7 @@ extern FanMode fanMode;
 extern float fanHeadAngle;
 extern float fanBladeAngle;
 extern glm::vec3 fanPosition;
+extern glm::vec3 catmullPoints[];
 
 /// @brief Initialize fan geometry and shaders
 void initFan();
