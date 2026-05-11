@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 
+/// @brief Single mesh within a model - holds GPU buffers and material properties
 struct Mesh {
     GLuint vao;
     GLuint vbo;
@@ -16,15 +17,21 @@ struct Mesh {
     glm::vec3 diffuseColor;
 };
 
+/// @brief 3D model loaded via Assimp - contains multiple meshes
 struct Model {
     std::vector<Mesh> meshes;
     GLuint shaderProgram;
+
+    // attribute locations
     GLint posLocation;
     GLint normalLocation;
     GLint texCoordLocation;
+
+    // matrix uniforms
     GLint PVMmatrixLocation;
     GLint MmatrixLocation;
     GLint normalMatrixLocation;
+
     GLint shininessLocation;
     GLint cameraPosLocation;
     GLint dirLightDirLocation;
