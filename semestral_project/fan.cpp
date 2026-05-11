@@ -13,9 +13,11 @@ FanMode fanMode = FAN_STOPPED;
 float fanHeadAngle = 0.0f;  // head rotation (level 2)
 float fanBladeAngle = 0.0f;  // blade rotation (level 3)
 glm::vec3 fanPosition = glm::vec3(2.0f, -0.7f, 9.0f);
+
+/// @brief Current fan movement time parameter, range 0.0 - 1.0
 float fanTime = 0.0f;
 
-// Catmull-Rom control points 
+/// @brief Control points for Catmull-Rom curve animation
 glm::vec3 catmullPoints[] = {
     glm::vec3(2.0f, -3.5f,  0.0f),
     glm::vec3(5.0f, -3.5f, -4.0f),
@@ -26,9 +28,11 @@ glm::vec3 catmullPoints[] = {
     glm::vec3(5.0f, -3.5f,  4.0f),
     glm::vec3(2.0f, -3.5f,  0.0f),
 };
+
+/// @brief Number of Catmull-Rom control points
 const int CATMULL_COUNT = 8;
 
-// Bezier control points (cubic)
+/// @brief Fixed cubic Bezier control points for Bezier animation mode
 static const glm::vec3 bezierPoints[] = {
     glm::vec3(-5.0f, -3.5f, -5.0f),
     glm::vec3(5.0f, -3.5f, -5.0f),
@@ -36,7 +40,12 @@ static const glm::vec3 bezierPoints[] = {
     glm::vec3(5.0f, -3.5f,  5.0f),
 };
 
-// Create simple cylinder vertices 
+/// @brief Generate cylinder vertices procedurally
+/// @param r cylinder radius
+/// @param h cylinder height
+/// @param seg number of segments (higher = smoother)
+/// @param color unused parameter kept for compatibility
+/// @return vector of vertices in format x,y,z,nx,ny,nz
 static std::vector<float> makeCylinder(float r, float h, int seg, glm::vec3 color) {
     std::vector<float> v;
     for (int i = 0; i < seg; i++) {
@@ -59,7 +68,10 @@ static std::vector<float> makeCylinder(float r, float h, int seg, glm::vec3 colo
     return v;
 }
 
-// Create blade (flat rectangle) 
+/// @brief Generate blade vertices as flat rectangle
+/// @param w blade width
+/// @param l blade length
+/// @return vector of vertices in format x,y,z,nx,ny,nz
 static std::vector<float> makeBlade(float w, float l) {
     std::vector<float> v = {
         -w / 2, 0, 0,    0,1,0,
@@ -78,6 +90,12 @@ static std::vector<float> makeBlade(float w, float l) {
     return v;
 }
 
+/// @brief Upload mesh vertices to GPU
+/// @param vao output VAO handle
+/// @param vbo output VBO handle
+/// @param v vertex data
+/// @param count output vertex count
+/// @param f fan geometry for attribute locations
 static void uploadMesh(GLuint& vao, GLuint& vbo, const std::vector<float>& v,
     int& count, const FanGeometry& f) {
     count = v.size() / 6;
@@ -139,7 +157,12 @@ void initFan() {
     uploadMesh(fan.bladeVao, fan.bladeVbo, bladeVerts, fan.bladeVertexCount, fan);
 }
 
-// Draw one mesh part
+/// @brief Draw single fan part with given transform and color
+/// @param vao VAO to draw
+/// @param count vertex count
+/// @param modelMat transformation matrix
+/// @param color diffuse color
+/// @param shininess Phong shininess
 static void drawPart(GLuint vao, int count, const glm::mat4& modelMat,
     const glm::vec3& color, float shininess) {
     glm::vec3 camPos = getCameraPos();
@@ -210,7 +233,9 @@ void drawFan() {
     }
 }
 
-// Catmull-Rom interpolation 
+/// @brief Interpolate position along Catmull-Rom spline
+/// @param t parameter 0.0 - 1.0
+/// @return interpolated position
 static glm::vec3 catmullRom(float t) {
     int n = CATMULL_COUNT - 1;
     float scaled = t * n;
@@ -229,7 +254,9 @@ static glm::vec3 catmullRom(float t) {
         (-p0 + 3.0f * p1 - 3.0f * p2 + p3) * u * u * u);
 }
 
-// Bezier interpolation
+/// @brief Interpolate position along cubic Bezier curve
+/// @param t parameter 0.0 - 1.0
+/// @return interpolated positio
 static glm::vec3 bezier(float t) {
     float u = 1.0f - t;
     return u * u * u * bezierPoints[0]

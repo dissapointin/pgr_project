@@ -1,6 +1,7 @@
 #pragma once
 #include "pgr.h"
 
+/// @brief Holds all OpenGL handles for the fog texture overlay
 struct FogTextureGeometry {
     GLuint vao;
     GLuint vbo;

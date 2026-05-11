@@ -4,6 +4,7 @@
 
 FogTextureGeometry fogTex;
 
+/// @brief Full screen quad vertices - format: x, y, z, u, v
 static const float fogQuadVertices[] = {
     -1.0f,  1.0f, 0.0f,  0.0f, 1.0f,
     -1.0f, -1.0f, 0.0f,  0.0f, 0.0f,

@@ -1,7 +1,7 @@
 #pragma once
 #include "pgr.h"
 
-// Fan movement modes
+/// @brief Fan movement mode
 enum FanMode {
     FAN_STOPPED = 0,
     FAN_CIRCLE,      // a) circle
@@ -9,6 +9,7 @@ enum FanMode {
     FAN_BEZIER       // c) Bezier
 };
 
+/// @brief Holds all OpenGL handles for the procedurally generated fan
 struct FanGeometry {
     // base (level 1)
     GLuint baseVao, baseVbo;
@@ -47,11 +48,11 @@ struct FanGeometry {
     GLint fogColorLocation;
 };
 
-extern FanMode fanMode;
-extern float fanHeadAngle;
-extern float fanBladeAngle;
-extern glm::vec3 fanPosition;
-extern glm::vec3 catmullPoints[];
+extern FanMode fanMode; // Current fan movement mode
+extern float fanHeadAngle; // Current head oscillation angle in degrees
+extern float fanBladeAngle; // Current blade rotation angle in degrees
+extern glm::vec3 fanPosition; // Current fan position in world space
+extern glm::vec3 catmullPoints[]; // Control points for Catmull-Rom curve, modifiable via config
 
 /// @brief Initialize fan geometry and shaders
 void initFan();
