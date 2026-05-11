@@ -16,8 +16,8 @@ void main() {
     fragPos_v = vec3(Mmatrix * vec4(position, 1.0));
 
     if (useRotation == 1) {
-        vec2 centered = texCoord - vec2(0.5, 0.5);
-        texCoord_v = vec2(texMatrix * vec4(centered, 0.0, 1.0)) + vec2(0.5, 0.5);
+        vec2 centered = texCoord - vec2(0.5, 0.5); //move the center, so we rotate arount (0,0)
+        texCoord_v = vec2(texMatrix * vec4(centered, 0.0, 1.0)) + vec2(0.5, 0.5); //rotate and get the center back
     } else {
         texCoord_v = texCoord;
     }

@@ -1,14 +1,20 @@
 #pragma once
 #include "pgr.h"
 
+/// @brief Holds all OpenGL handles and shader locations for the clock
 struct ClockGeometry {
     GLuint vao;
     GLuint vbo;
     GLuint shaderProgram;
+
+    // Textures
     GLuint clockTexture;
     GLuint arrowTexture;
+
+    // Positions
     GLint posLocation;
     GLint texCoordLocation;
+
     GLint PVMmatrixLocation;
     GLint texSamplerLocation;
     GLint useRotationLocation;

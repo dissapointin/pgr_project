@@ -1,9 +1,14 @@
 #include "clock.h"
 #include "camera.h"
+#include "render.h"
+
+extern bool fogEnabled;
 
 ClockGeometry clock_obj;
 
 // simple quad: position + texcoord
+
+/// @brief Quad vertices for clock face and arrows - format: x, y, z, u, v
 static const float quadVertices[] = {
     // x     y     z     u     v
     -0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
@@ -73,7 +78,6 @@ void drawClock() {
 
     glUseProgram(clock_obj.shaderProgram);
 
-    extern bool fogEnabled;
     glm::vec3 camPos = getCameraPos();
     glUniform3fv(clock_obj.cameraPosLocation, 1, glm::value_ptr(camPos));
     glUniform1i(clock_obj.fogEnabledLocation, fogEnabled ? 1 : 0);
