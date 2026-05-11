@@ -9,20 +9,20 @@ glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 0.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
-float yaw = -90.f; // horizontal angle
-float pitch = 0.0f; // vertical angle
-float speed = 0.1f; // speed of the camera
-float sensitivity = 0.3f; // mouse sensitivity
+float yaw = -90.f; // Horizontal rotation angle in degrees
+float pitch = 0.0f; // Vertical rotation angle in degrees
+float speed = 0.1f; // Camera movement speed per frame
+float sensitivity = 0.3f; // Mouse look sensitivity
 
 // remember last mouse position for calculating movement between frames
-int lastMouseX = 640;
-int lastMouseY = 360;
-bool firstMouse = true; // to not have jumps on the first mouse movement
-bool freeCamera = true; // allow free camera movement
+int lastMouseX = 640; // Last mouse X position for delta calculation
+int lastMouseY = 360; // Last mouse Y position for delta calculation
+bool firstMouse = true; // True until first mouse movement to prevent camera jump
+bool freeCamera = true; // True when free camera mode is active
 
 glm::mat4 projMatrix;
 
-// Static camera positions
+/// @brief Stores position and look direction for a static camera view
 struct StaticCamera {
     glm::vec3 pos;
     glm::vec3 front;
