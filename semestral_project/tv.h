@@ -1,6 +1,7 @@
 #pragma once
 #include "pgr.h"
 
+/// @brief Holds all OpenGL handles for the animated TV screen
 struct TVGeometry {
     GLuint vao;
     GLuint vbo;

@@ -5,11 +5,19 @@ extern bool fogEnabled;
 
 TVGeometry tv;
 
+/// @brief Number of columns in TV sprite sheet
 const int TV_COLS = 8;
+
+/// @brief Number of rows in TV sprite sheet
 const int TV_ROWS = 30;
+
+/// @brief Total number of animation frames (TV_COLS * TV_ROWS)
 const int TV_TOTAL_FRAMES = TV_COLS * TV_ROWS;
+
+/// @brief Animation playback speed in frames per second
 const float TV_FPS = 24.0f;
 
+/// @brief TV screen quad vertices - format: x, y, z, u, v
 static const float tvQuadVertices[] = {
     -0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
     -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
