@@ -9,9 +9,12 @@
 extern glm::vec3 succulentPos;
 extern float succulentBaseY;
 
-// fog values stored globally for shaders
-float configFogStart = 1.0f;
-float configFogEnd = 10.0f;
+// fog values stored globally for shaders is config is not loaded
+/// @brief Fog start distance loaded from config file
+float configFogStart = 1.0f; // fog starts 1 from the camera
+
+/// @brief Fog end distance loaded from config file
+float configFogEnd = 10.0f; // fog ends 10 from the camera (and the most color)
 
 void loadConfig(const std::string& path) {
     std::ifstream file(path);
