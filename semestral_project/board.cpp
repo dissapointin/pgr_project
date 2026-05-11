@@ -83,7 +83,7 @@ const int BOARD_VERTEX_COUNT = sizeof(boardVertices) / (6 * sizeof(float));
 
 void initBoard() {
     GLuint shaders[] = {
-        pgr::createShaderFromFile(GL_VERTEX_SHADER,   "shaders/room.vert"),
+        pgr::createShaderFromFile(GL_VERTEX_SHADER, "shaders/board.vert"),
         pgr::createShaderFromFile(GL_FRAGMENT_SHADER, "shaders/board.frag"),
         0
     };
