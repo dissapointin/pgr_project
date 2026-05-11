@@ -4,6 +4,7 @@
 
 SkyboxGeometry skybox;
 
+/// @brief Skybox cube vertices - unit cube centered at origin, 36 vertices (6 faces * 2 triangles)
 static const float skyboxVertices[] = {
     -1, 1,-1,  -1,-1,-1,   1,-1,-1,   1,-1,-1,   1, 1,-1,  -1, 1,-1,
     -1,-1, 1,  -1,-1,-1,  -1, 1,-1,  -1, 1,-1,  -1, 1, 1,  -1,-1, 1,
