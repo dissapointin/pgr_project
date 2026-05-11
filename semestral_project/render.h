@@ -1,7 +1,7 @@
 #pragma once
 #include "pgr.h"
 
-// Room geometry buffers
+/// @brief Holds all OpenGL handles for the room geometry
 struct RoomGeometry {
     GLuint vao;
     GLuint vbo;
@@ -13,22 +13,22 @@ struct RoomGeometry {
     GLint normalMatrixLocation;
     GLint shininessLocation;
     GLint cameraPosLocation;
-    // dir light
+    // directional light
     GLint dirLightDirLocation;
     GLint dirLightColorLocation;
-    // point light
+    // point light (ceiling lamp)
     GLint pointLightPosLocation;
     GLint pointLightColorLocation;
     GLint pointLightConstantLocation;
     GLint pointLightLinearLocation;
     GLint pointLightQuadraticLocation;
-    // spot light
+    // spot light (flashlight)
     GLint spotLightPosLocation;
     GLint spotLightDirLocation;
     GLint spotLightColorLocation;
     GLint spotLightCutoffLocation;
     GLint spotLightOuterCutoffLocation;
-    // room textures
+    // textures
     GLuint floorTexture;
     GLuint wallTexture;
     GLuint ceilingTexture;
@@ -43,7 +43,13 @@ extern float configFogEnd;
 
 extern float timeOfDay;
 extern bool autoTime;
+
+/// @brief Get directional light direction based on current timeOfDay
+/// @return normalized direction vector
 glm::vec3 getDirLightDir();
+
+/// @brief Get directional light color based on current timeOfDay
+/// @return RGB color vector
 glm::vec3 getDirLightColor();
 
 // For light picking
