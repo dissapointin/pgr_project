@@ -5,10 +5,17 @@
 
 FontGeometry fontObj;
 
+/// @brief Number of character columns in font atlas
 const int FONT_COLS = 13;
+
+/// @brief Number of character rows in font atlas
 const int FONT_ROWS = 7;
 
-// map character to row/col in texture
+/// @brief Map ASCII character to its position in font atlas
+/// @param c character to look up
+/// @param col output column index in atlas
+/// @param row output row index in atlas
+/// @return true if character found, false if unsupported
 static bool charToIndex(char c, int& col, int& row) {
     if (c >= 'A' && c <= 'M') { row = 0; col = c - 'A'; return true; }
     if (c >= 'N' && c <= 'Z') { row = 1; col = c - 'N'; return true; }
@@ -27,6 +34,7 @@ static bool charToIndex(char c, int& col, int& row) {
     return false;
 }
 
+/// @brief Single character quad vertices - format: x, y, z, u, v. Range 0-1 for scaling
 static const float charQuad[] = {
     0.0f, 1.0f, 0.0f,  0.0f, 1.0f,
     0.0f, 0.0f, 0.0f,  0.0f, 0.0f,

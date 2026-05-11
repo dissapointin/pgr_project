@@ -2,6 +2,7 @@
 #include "pgr.h"
 #include <string>
 
+/// @brief Holds all OpenGL handles for bitmap font rendering
 struct FontGeometry {
     GLuint vao;
     GLuint vbo;

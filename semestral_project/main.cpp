@@ -16,12 +16,15 @@
 #include "config.h"
 #include <iostream>
 
-// --- Window settings ---
+// Window settings
+/// @brief Window width in pixels
 const int WINDOW_WIDTH = 1280;
-const int WINDOW_HEIGHT = 720;
-const char* WINDOW_TITLE = "Japanese Classroom";
 
-// --- Callbacks ---
+/// @brief Window height in pixels
+const int WINDOW_HEIGHT = 720;
+
+/// @brief Window title
+const char* WINDOW_TITLE = "Japanese Classroom";
 
 /// @brief Display callback - called every frame
 void display() {
