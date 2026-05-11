@@ -7,6 +7,7 @@
 // TEACHER'S DESK MODEL: https://sketchfab.com/3d-models/teachers-desk-9ee8608e76704de7aa67d022c81e42cc
 // TV MODEL: https://sketchfab.com/3d-models/led-tv-low-poly-free-c3b53886b18247b79460b4992ea071d1
 // SKYBOX PARK 2: https://humus.name/index.php?page=Textures&start=128
+// CURTAINS MODEL: https://sketchfab.com/3d-models/curtains-155c08c127d649758fa074a216bd33cf
 
 #include "pgr.h"
 #include "render.h"

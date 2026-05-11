@@ -27,6 +27,7 @@ Model shelfModel;
 Model tvModel;
 Model encyclopediaModel;
 Model succulentModel;
+Model curtainsModel;
 Model windowModel;
 
 // For light picking
@@ -250,6 +251,9 @@ void initScene() {
     initModelShader(succulentModel);
     loadModel("models/succulent/succulent.obj", succulentModel);
 
+    initModelShader(curtainsModel);
+    loadModel("models/curtains/curtains.obj", curtainsModel);
+
     initFan();
 
     initFogTexture();
@@ -408,6 +412,11 @@ void drawScene() {
     glm::mat4 succulentMatrix = glm::translate(glm::mat4(1.0f), succulentPos);
     succulentMatrix = glm::scale(succulentMatrix, glm::vec3(0.2f, 0.2f, 0.2f));
     drawModel(succulentModel, succulentMatrix);
+
+    glm::mat4 curtainsMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(-7.5f, -2.3f, -1.0f));
+    curtainsMatrix = glm::rotate(curtainsMatrix, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    curtainsMatrix = glm::scale(curtainsMatrix, glm::vec3(0.08f, 0.08f, 0.08f));
+    drawModel(curtainsModel, curtainsMatrix);
 
     drawFan();
 
