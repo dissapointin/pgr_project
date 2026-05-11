@@ -24,6 +24,10 @@ smooth in vec3 fragPos_v;
 smooth in vec3 normal_v;
 out vec4 fragColor;
 
+/// @brief Calculate directional light contribution (Phong)
+/// @param norm surface normal
+/// @param viewDir direction to camera
+/// @param diffuse diffuse color of surface
 vec3 calcDirLight(vec3 norm, vec3 viewDir, vec3 diffuse) {
     vec3 lightD  = normalize(dirLightDir);
     vec3 reflDir = reflect(-lightD, norm);
@@ -35,6 +39,10 @@ vec3 calcDirLight(vec3 norm, vec3 viewDir, vec3 diffuse) {
          + spec * vec3(0.05) * dirLightColor;
 }
 
+/// @brief Calculate point light contribution with attenuation
+/// @param norm surface normal  
+/// @param viewDir direction to camera
+/// @param diffuse diffuse color of surface
 vec3 calcPointLight(vec3 norm, vec3 viewDir, vec3 diffuse) {
     vec3 lightD  = normalize(pointLightPos - fragPos_v);
     vec3 reflDir = reflect(-lightD, norm);
@@ -49,6 +57,10 @@ vec3 calcPointLight(vec3 norm, vec3 viewDir, vec3 diffuse) {
            * pointLightColor * attenuation;
 }
 
+/// @brief Calculate spot light contribution with soft edges
+/// @param norm surface normal
+/// @param viewDir direction to camera
+/// @param diffuse diffuse color of surface
 vec3 calcSpotLight(vec3 norm, vec3 viewDir, vec3 diffuse) {
     vec3 lightD   = normalize(spotLightPos - fragPos_v);
     vec3 reflDir  = reflect(-lightD, norm);

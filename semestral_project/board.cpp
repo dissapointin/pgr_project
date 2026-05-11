@@ -10,6 +10,8 @@ BoardGeometry board;
 // board on back wall (z = -1 in room space)
 // width: -0.8 to 0.8, height: 0.1 to 0.7
 
+/// @brief Hardcoded blackboard geometry - vertices in format: x, y, z, nx, ny, nz
+/// Contains main surface, back face, top/bottom/left/right frame and chalk shelf
 static const float boardVertices[] = {
 
     // MAIN SURFACE
@@ -76,6 +78,7 @@ static const float boardVertices[] = {
        -0.8f, 0.08f, 0.07f,  0,0,1,
 };
 
+/// @brief Total number of vertices in boardVertices array
 const int BOARD_VERTEX_COUNT = sizeof(boardVertices) / (6 * sizeof(float));
 
 void initBoard() {
