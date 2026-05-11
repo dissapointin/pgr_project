@@ -1,6 +1,7 @@
 #pragma once
 #include "pgr.h"
 
+/// @brief Holds all OpenGL handles for the status bar HUD element
 struct StatusBarGeometry {
     GLuint vao;
     GLuint vbo;

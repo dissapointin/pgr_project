@@ -3,7 +3,7 @@
 
 StatusBarGeometry sb;
 
-// full screen quad in NDC: bottom strip
+/// @brief Status bar quad vertices in NDC coordinates - horizontal strip at bottom of screen
 static const float sbVertices[] = {
     // x      y      z
     -0.9f, -0.95f, 0.0f,
