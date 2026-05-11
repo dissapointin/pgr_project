@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 
+/// @brief Single mesh loaded from OBJ file without external library
 struct ObjMesh {
     GLuint vao;
     GLuint vbo;
@@ -10,12 +11,17 @@ struct ObjMesh {
     int indexCount;
     glm::vec3 diffuseColor;
     GLuint shaderProgram;
+
+    // attribute locations
     GLint posLocation;
     GLint normalLocation;
     GLint texCoordLocation;
+
+    // matrix uniforms
     GLint PVMmatrixLocation;
     GLint MmatrixLocation;
     GLint normalMatrixLocation;
+
     GLint shininessLocation;
     GLint cameraPosLocation;
     GLint dirLightDirLocation;
@@ -36,11 +42,6 @@ struct ObjMesh {
     GLint fogEndLocation;
     GLint fogColorLocation;
 };
-
-/// @brief Load material color from MTL file
-/// @param mtlPath path to .mtl file
-/// @return diffuse color (default to gray if loading fails)
-static glm::vec3 loadMTL(const std::string& mtlPath);
 
 /// @brief Load OBJ file without external library
 /// @param path path to .obj file
