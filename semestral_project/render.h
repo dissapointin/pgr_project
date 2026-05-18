@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    rendeer.h
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Declaration of functions for rendering the scene.
+ */
+ //----------------------------------------------------------------------------------------
+
 #pragma once
 #include "pgr.h"
 

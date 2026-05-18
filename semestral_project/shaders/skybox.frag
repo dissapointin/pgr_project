@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    skybox.frag
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Implementation of fragment shader for the skybox.
+ */
+//----------------------------------------------------------------------------------------
+
 #version 140
 
 smooth in vec3 texCoord_v;

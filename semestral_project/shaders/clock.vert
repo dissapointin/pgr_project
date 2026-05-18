@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    clock.vert
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Implementation of vertex shader for the clock textures.
+ */
+//----------------------------------------------------------------------------------------
+
 #version 140
 
 in vec3 position;

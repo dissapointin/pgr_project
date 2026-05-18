@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    clock.cpp
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Implementation of function for the clock textures.
+ */
+ //----------------------------------------------------------------------------------------
+
 #include "clock.h"
 #include "camera.h"
 #include "render.h"
@@ -85,7 +94,7 @@ void drawClock() {
     glUniform1f(clock_obj.fogEndLocation, 10.0f);
     glUniform3f(clock_obj.fogColorLocation, 0.7f, 0.7f, 0.7f);
 
-    float timeMs = (float)glutGet(GLUT_ELAPSED_TIME);
+	float timeMs = (float)glutGet(GLUT_ELAPSED_TIME); // returns time in milliseconds since the program started
     float secondAngle = (timeMs / 1000.0f) * (360.0f / 60.0f);
     float minuteAngle = (timeMs / 60000.0f) * (360.0f / 60.0f);
 

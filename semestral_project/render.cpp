@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    render.cpp
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Implementation of functions for rendering the scene.
+ */
+ //----------------------------------------------------------------------------------------
+
 #include "render.h"
 #include "camera.h"
 #include "board.h"

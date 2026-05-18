@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    config.h
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Declaration of function for the config file.
+ */
+ //----------------------------------------------------------------------------------------
+
 #pragma once
 #include <string>
 #include "pgr.h"

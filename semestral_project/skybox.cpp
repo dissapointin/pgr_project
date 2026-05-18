@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    skybox.cpp
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Implementation of functions for the skybox.
+ */
+ //----------------------------------------------------------------------------------------
+
 #include "skybox.h"
 #include "camera.h"
 #include <iostream>

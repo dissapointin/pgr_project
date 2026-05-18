@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    model.h
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Declaration of functions for the model loading and rendering.
+ */
+ //----------------------------------------------------------------------------------------
+
 #pragma once
 #include "pgr.h"
 #include <assimp/Importer.hpp>

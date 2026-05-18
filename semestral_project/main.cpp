@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    main.cpp
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Implementation of main application functions.
+ */
+ //----------------------------------------------------------------------------------------
+
 // DESK AND CHAIR MODELS: https://sketchfab.com/3d-models/school-desk-a74180ee97bb4917b24cd48580663b44
 // SHELF MODEL: https://sketchfab.com/3d-models/kallax-shelf-e2d30124563947608a500df26f77b659
 // TRASH BIN MODEL: https://sketchfab.com/3d-models/waste-bins-f25c067806dd45aba900502e9c470e7a

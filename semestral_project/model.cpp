@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    model.cpp
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Implementation of function for the model loading and rendering.
+ */
+ //----------------------------------------------------------------------------------------
+
 #include "model.h"
 #include "camera.h"
 #include "render.h"

@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    fog_texture.cpp
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Implementation of function for the fog texture.
+ */
+ //----------------------------------------------------------------------------------------
+
 #include "fog_texture.h"
 #include "camera.h"
 #include "render.h"

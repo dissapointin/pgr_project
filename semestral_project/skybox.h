@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    skybox.h
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Declaration of functions for the skybox.
+ */
+ //----------------------------------------------------------------------------------------
+
 #pragma once
 #include "pgr.h"
 

@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    statusbar.cpp
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Implementation of functions for the status bar.
+ */
+ //----------------------------------------------------------------------------------------
+
 #include "statusbar.h"
 #include "render.h"
 

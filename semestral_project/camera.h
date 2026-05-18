@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    camera.h
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Declaration of functions for the camera.
+ */
+ //----------------------------------------------------------------------------------------
+
 #pragma once
 #include "pgr.h"
 

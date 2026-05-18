@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    room.vert
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Implementation of vertex shader for the room textures.
+ */
+//----------------------------------------------------------------------------------------
+
 #version 140
 
 uniform mat4 PVMmatrix; // projection view

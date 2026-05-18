@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    font.h
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Declaration of function for the font texture.
+ */
+ //----------------------------------------------------------------------------------------
+
 #pragma once
 #include "pgr.h"
 #include <string>

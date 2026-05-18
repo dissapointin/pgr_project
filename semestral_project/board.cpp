@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    board.cpp
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Implementation of functions for the board object.
+ */
+ //----------------------------------------------------------------------------------------
+
 #include "board.h"
 #include "camera.h"
 #include "render.h"

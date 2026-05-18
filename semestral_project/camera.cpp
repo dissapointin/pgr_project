@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    camera.cpp
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Implementation of functions for the camera.
+ */
+ //----------------------------------------------------------------------------------------
+
 #include "camera.h"
 #include "render.h"
 #include <iostream>

@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    font.cpp
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Implementation of function for the font texture.
+ */
+ //----------------------------------------------------------------------------------------
+
 #include "font.h"
 #include "render.h"
 #include <sstream>

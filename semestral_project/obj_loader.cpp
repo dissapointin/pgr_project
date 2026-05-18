@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    obj_loader.cpp
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Implementation of function for loading OBJ models.
+ */
+ //----------------------------------------------------------------------------------------
+
 #include "obj_loader.h"
 #include "camera.h"
 #include "render.h"
@@ -67,7 +76,7 @@ bool loadOBJ(const std::string& path, ObjMesh& mesh) {
         else if (token == "mtllib") {
             ss >> mtlFile;
         }
-        else if (token == "f") {
+        else if (token == "f") { // v/vt/vn
             std::vector<glm::ivec3> faceVerts;
             std::string vertStr;
             while (ss >> vertStr) {

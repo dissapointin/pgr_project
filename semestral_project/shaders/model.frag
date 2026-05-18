@@ -1,3 +1,12 @@
+//----------------------------------------------------------------------------------------
+/**
+ * \file    model.frag
+ * \author  Veronika Ihnashkina
+ * \date    Summer semestr of 2025/2026 school year
+ * \brief   Implementation of fragment shader for the model objects.
+ */
+//----------------------------------------------------------------------------------------
+
 #version 140
 
 uniform float fogStart;
